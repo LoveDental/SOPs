@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Patient Experience — PCC Flow | Love Dental</title>
+<style>
+  :root {
+    --ld-blue: #1C5C82;
+    --ld-blue-dark: #14455f;
+    --ld-blue-light: #e8f1f6;
+    --ld-blue-mid: #d5e8f0;
+    --ink: #1f2933;
+    --muted: #5a6b76;
+    --paper: #ffffff;
+    --line: #d9e2e8;
+    --amber: #b5701a;
+    --amber-bg: #fbf2e6;
+    --green: #2f6b4f;
+    --green-bg: #e9f3ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: #f3f6f8;
+    line-height: 1.55;
+    padding: 40px 20px;
+  }
+  .doc {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--paper);
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(28,92,130,0.10);
+    overflow: hidden;
+  }
+  .masthead {
+    background: linear-gradient(135deg, var(--ld-blue) 0%, var(--ld-blue-dark) 100%);
+    color: #fff;
+    padding: 38px 44px 32px;
+  }
+  .masthead .brand {
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    opacity: 0.85; margin-bottom: 10px;
+  }
+  .masthead h1 { font-size: 27px; font-weight: 700; line-height: 1.2; }
+  .masthead .sub { margin-top: 8px; font-size: 15px; opacity: 0.9; font-weight: 400; }
+  .body { padding: 36px 44px 48px; }
+
+  .rules {
+    background: var(--ld-blue-light);
+    border-left: 4px solid var(--ld-blue);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+  }
+  .rules .lead { font-weight: 600; color: var(--ld-blue-dark); margin-bottom: 12px; font-size: 15px; }
+  .rules ol { margin-left: 20px; }
+  .rules li { margin-bottom: 6px; font-size: 14.5px; }
+  .rules li strong { color: var(--ld-blue-dark); }
+
+  .stage { margin-bottom: 30px; }
+  .stage-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .stage-num {
+    flex: 0 0 auto; min-width: 30px; height: 30px; padding: 0 6px;
+    background: var(--ld-blue); color: #fff; border-radius: 15px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px;
+  }
+  .stage-title { font-size: 18px; font-weight: 700; color: var(--ld-blue-dark); }
+  .stage-when { font-size: 13px; color: var(--muted); font-weight: 400; font-style: italic; }
+  .say {
+    background: var(--ld-blue-mid); border-radius: 8px;
+    padding: 16px 20px; margin-bottom: 8px;
+  }
+  .say .tag {
+    display: inline-block; font-size: 10.5px; letter-spacing: 1.5px;
+    font-weight: 700; text-transform: uppercase; color: var(--ld-blue-dark); margin-bottom: 6px;
+  }
+  .say .line { font-size: 16px; line-height: 1.5; color: #102733; font-weight: 500; }
+  .say.alt { background: #eef4f8; }
+  .say .speaker {
+    font-size: 12px; font-weight: 700; color: var(--ld-blue);
+    text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px;
+  }
+  .instruction {
+    background: var(--ld-blue-mid); border-radius: 8px;
+    padding: 16px 20px; margin-bottom: 8px;
+    font-size: 15.5px; font-weight: 500; color: #102733;
+  }
+  .pause { font-size: 14px; color: var(--ld-blue-dark); font-weight: 600; margin: 8px 0 4px; padding-left: 4px; }
+  .coaching { margin-top: 10px; padding-left: 4px; }
+  .coaching .tag {
+    font-size: 10.5px; letter-spacing: 1.5px; font-weight: 700;
+    text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px;
+  }
+  .coaching ul { margin-left: 18px; }
+  .coaching li { font-size: 13.5px; color: var(--muted); margin-bottom: 5px; line-height: 1.5; }
+  .coaching li strong { color: var(--ink); }
+  .helper { font-size: 13.5px; color: var(--muted); margin: 4px 0 8px; padding-left: 4px; font-style: italic; }
+
+  .divider { height: 1px; background: var(--line); margin: 26px 0; border: none; }
+
+  .callout { border-radius: 10px; padding: 20px 24px; margin-bottom: 8px; }
+  .callout.objection { background: var(--amber-bg); border-left: 4px solid var(--amber); }
+  .callout-label {
+    font-size: 11px; letter-spacing: 1.5px; font-weight: 700; text-transform: uppercase;
+    margin-bottom: 10px; display: block;
+  }
+  .callout.objection .callout-label { color: var(--amber); }
+  .fork { display: flex; gap: 14px; margin-bottom: 8px; }
+  .fork-col { flex: 1; border-radius: 10px; padding: 18px 20px; }
+  .fork-col.total { background: var(--amber-bg); border-top: 4px solid var(--amber); }
+  .fork-col.timing { background: var(--green-bg); border-top: 4px solid var(--green); }
+  .fork-col h4 { font-size: 14px; margin-bottom: 4px; font-weight: 700; }
+  .fork-col.total h4 { color: var(--amber); }
+  .fork-col.timing h4 { color: var(--green); }
+  .fork-col .means { font-size: 12.5px; color: var(--muted); font-style: italic; margin-bottom: 12px; }
+  .fork-sol { margin-bottom: 12px; }
+  .fork-sol .sname { font-weight: 700; font-size: 13.5px; color: var(--ink); display: block; margin-bottom: 3px; }
+  .fork-sol .sline { font-size: 13px; color: #2c3a44; line-height: 1.5; }
+  .trap {
+    background: #fef6f6; border-left: 4px solid #b3454b; border-radius: 8px;
+    padding: 14px 18px; margin-top: 10px;
+  }
+  .trap .tag { font-size: 10.5px; letter-spacing: 1.5px; font-weight: 700; text-transform: uppercase; color: #b3454b; display: block; margin-bottom: 6px; }
+  .trap p { font-size: 13px; color: #4a3133; line-height: 1.55; }
+
+  .footer-bar {
+    background: var(--ld-blue-light); border-radius: 8px; padding: 16px 22px;
+    text-align: center; font-weight: 700; color: var(--ld-blue-dark);
+    font-size: 15px; margin-top: 30px;
+  }
+  .colophon { text-align: center; font-size: 12px; color: var(--muted); margin-top: 22px; line-height: 1.6; }
+  @media (max-width: 600px) { .fork { flex-direction: column; } }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .doc { box-shadow: none; border-radius: 0; max-width: 100%; }
+    .stage, .say, .callout, .fork-col, .fork { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="masthead">
+    <div class="brand">Love Dental</div>
+    <h1>The New Patient Experience</h1>
+    <div class="sub">Patient Care Coordinator Flow</div>
+  </div>
+  <div class="body">
+
+    <div class="rules">
+      <div class="lead">The patient is anxious. Your job is to make them feel informed, led, and trusted. Three rules run through every line below:</div>
+      <ol>
+        <li><strong>State, don't ask.</strong> Lead them warmly instead of asking permission.</li>
+        <li><strong>One question at a time.</strong> Ask, then go quiet and listen.</li>
+        <li><strong>Stay in your lane.</strong> Dr. Abedini does diagnosis and trust. You do the cost conversation and the close.</li>
+      </ol>
+    </div>
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">1</div><div><span class="stage-title">The Greeting</span> &nbsp;<span class="stage-when">— you walk out to the waiting area</span></div></div>
+      <div class="say"><span class="tag">Say</span><div class="line">"Hi [Patient Name] — I'm Tabetha. I work right alongside Dr. Abedini, and I'll be with you through your whole visit today. I'm really glad you're here. Come on back with me — I'll get you settled."</div></div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li>You — not the assistant — being the first face sets the entire relationship. This is the most important 10 seconds of the visit.</li>
+        <li>No "Can I walk you back?" You're <strong>leading, not asking</strong>. An anxious patient wants to be led.</li>
+        <li>Reduce the number of questions they're asked. They already field 5–10 admin questions at check-in, 5–10 clinical questions in the operatory, and more from the doctor. We still need them to say yes to treatment — so we don't want the most important answer they give to be the 25th one.</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">2</div><div><span class="stage-title">Getting to Know the Patient on a Personal Level</span> &nbsp;<span class="stage-when">— after and/or during the tour</span></div></div>
+      <div class="instruction">After or during the tour, ask a personal question or two to get to know them.</div>
+      <div class="helper">Use something genuine as a starting point — something they mentioned on the intake form, another state on their insurance card or license that hints they moved here, something they're holding or wearing. Use what comes naturally.</div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li><strong>Show them we care about them on a personal level.</strong></li>
+        <li>This becomes another anchor the doctor can use to connect with the patient.</li>
+        <li>Input interesting details into the patient's chart and let the doctor know.</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">3</div><div><span class="stage-title">First Discovery</span> &nbsp;<span class="stage-when">— walking back to the operatory</span></div></div>
+      <div class="say"><span class="tag">Say</span><div class="line">"So tell me — what made you decide to come in today?"</div></div>
+      <div class="pause">Then stop talking. Let them answer fully. Don't finish their sentences.</div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li><strong>One question.</strong> Their answer is your anchor for the whole appointment — you'll quote it back during the case presentation.</li>
+        <li>If they mention anxiety, name it: "A lot of people feel exactly that way. We'll go slow, and I'll check in with you the whole time."</li>
+        <li>Write down their exact words.</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">4</div><div><span class="stage-title">Surfacing Barriers</span> &nbsp;<span class="stage-when">— seated, before the assistant sets up</span></div></div>
+      <div class="say"><span class="tag">Say</span><div class="line">"Before we get started, I want a couple of minutes with you. Be honest with me — has anything held you back from getting dental work done before? For most people it's one thing in particular."</div></div>
+      <div class="pause">Then quiet. Let it land.</div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li><strong>One question.</strong> Cost, time, and past bad experiences surface on their own — you don't need to list them out loud.</li>
+        <li>Surfacing it now means you're never ambushed by it later during case presentation.</li>
+        <li>If finances come up early, normalize it: "We've got a lot of ways to make treatment work — we'll go through all of that together."</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">5</div><div><span class="stage-title">The "One Thing" Question</span> &nbsp;<span class="stage-when">— your close-out before handoff</span></div></div>
+      <div class="say"><span class="tag">Say</span><div class="line">"Last thing before I let you get your photos taken — if we could fix just one thing for you, what would it be?"</div></div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li>The single most valuable sentence you'll collect. It becomes your <strong>exact opener</strong> when you return for case presentation.</li>
+        <li>You only need 3–4 minutes total for Stages 2–4. Two real questions and genuine eye contact is plenty.</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">6</div><div><span class="stage-title">Handoff to the Assistant</span></div></div>
+      <div class="say"><span class="speaker">PCC</span><div class="line">"I'm going to have [DA Name] take some photos and x-rays so Dr. Abedini gets a really thorough look. You're in great hands — I'll be back once he's had a chance to go over everything."</div></div>
+      <div class="say alt"><span class="speaker">Assistant</span><div class="line">"I'm going to take a full set of x-rays and some photos of your smile so Dr. Abedini gets a complete picture. About 20 minutes — nice and easy."</div></div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li>Everything loaded and charted <strong>before</strong> Dr. Abedini walks in. No waiting after intake.</li>
+        <li>Assistant flags anything notable to PCC before the huddle.</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">7</div><div><span class="stage-title">The Huddle</span> &nbsp;<span class="stage-when">— brief Doctor before he enters</span></div></div>
+      <div class="say"><span class="speaker">PCC → Doctor</span><div class="line">"[Patient Name] came in because [their exact words]. They mentioned [any barrier — cost, anxiety, past experience]. Their number-one goal is [the 'one thing' from Stage 5]. They seem [engaged / nervous / motivated]."</div></div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li>This 60–90 seconds is the <strong>highest-leverage moment in the entire flow.</strong> Never skip it.</li>
+        <li>It completely changes how the doctor walks into the room.</li>
+        <li>If he's running behind, pass it as a quick note or text.</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">8</div><div><span class="stage-title">Doctor Enters</span> &nbsp;<span class="stage-when">— anchored to their concern</span></div></div>
+      <div class="say"><span class="speaker">Doctor</span><div class="line">"[Patient Name], Tabetha told me you've been thinking about [their stated concern] — I want to take a close look at that today. Let's go through it together."</div></div>
+      <div class="say alt"><span class="speaker">During photo review</span><div class="line">"What I'm seeing here is [findings in plain language]. This connects directly to what you mentioned about [their concern]."</div></div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li>Target 15–20 minutes. Doctor's job is <strong>diagnosis and trust</strong> — not the money conversation.</li>
+        <li>The assistant enters findings into the plan in real time, as he speaks.</li>
+        <li>Anchoring to their concern first shows the whole team listened.</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">9</div><div><span class="stage-title">Doctor Exits Cleanly</span> &nbsp;<span class="stage-when">— no fee talk</span></div></div>
+      <div class="say"><span class="speaker">Doctor</span><div class="line">"I'm going to put together everything I recommend, and Tabetha's going to walk you through all of it — the what, the why, and how we make it work for you. She's the best there is at this. I'll check back before you leave if you have more clinical questions."</div></div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li><strong>Doctor does NOT discuss fees, phasing, or payment.</strong> That is PCC's lane, every time.</li>
+        <li>If he tends to linger, agree on a quiet signal beforehand — eye contact, a sticky note, or Open Dental messaging.</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">10</div><div><span class="stage-title">PCC Returns &amp; Resets the Room</span></div></div>
+      <div class="say"><span class="tag">Say</span><div class="line">"[Patient Name], how are you doing? Let me sit with you for a few minutes and walk through everything."</div></div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li>Have the assistant step out. Dim the overhead light. Sit at eye level. Sit <strong>next to</strong> the patient, not across from them.</li>
+        <li>You're resetting from "clinical exam" to "<em>two people figuring this out together.</em>"</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">11</div><div><span class="stage-title">Present, Anchored to Their Words</span> &nbsp;<span class="stage-when">— never open with the fee</span></div></div>
+      <div class="say"><span class="tag">Say</span><div class="line">"When you came in, you told me [their exact words]. Everything Doctor is recommending connects right back to that. Let me show you what he found. His plan focuses on fixing it for you and — most importantly — preventing it from happening again to that tooth and the others."</div></div>
+      <div class="say alt"><span class="speaker">Walk through in plain language</span><div class="line">"There are a few things he wants to take care of. The most important one for you right now is [priority tied to their concern]. Here's what it looks like [show photo, not x-ray]. And here's what it's actually like to have it done — '2 appointments: one to fix the problem and get the tooth ready for the lab, and another much quicker visit to deliver the crown. Dr. Abedini knows most patients don't enjoy the numbing part, so he recommends taking care of the fillings near that tooth at the same appointment. That's it! Easy peezy.'"</div></div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li>Use a printed or iPad one-pager in plain language — something they can <strong>hold</strong>. Holding it reduces fee shock.</li>
+        <li>Never say "treatment plan." Say "what we recommend" or "what Doctor wants for you."</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">12</div><div><span class="stage-title">The Cost Conversation</span> &nbsp;<span class="stage-when">— with confidence</span></div></div>
+      <div class="say"><span class="speaker">If treatment is under $10,000</span><div class="line">"Dr. Abedini recommended a personalized plan to get you from where we are now to your healthiest self. Your plan takes care of [that broken tooth] plus the rest of what you need. I'll review everything, but because you said [XXXX] is your primary concern, Dr. Abedini would like to get started on that first. Here's what we're looking at. Your insurance is incredible! Between what your insurance is helping with and what Dr. Abedini wanted to do for you personally, your portion is only [XXXX]. Would you like to take care of that in one piece, or separate it into monthly payments?"</div></div>
+      <div class="say alt"><span class="speaker">If treatment is over $10,000</span><div class="line">"Dr. Abedini recommended a personalized plan to get you from where we are now to your healthiest self. Your plan takes care of [their primary concern] plus the rest of what you need. Because you said [XXXX] is your primary concern, Dr. Abedini would like to get started on that first. Here's what we're looking at. Your insurance is incredible! Between what your insurance is helping with and what Dr. Abedini wanted to do for you personally, your portion is only [XXXX]. Would you like to take care of that in one piece, or separate it into monthly payments?"</div></div>
+      <div class="pause">Then PAUSE. Wait. Do not fill the silence.</div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li>Silence after the number is normal. Resist filling it. <strong>The first person to talk after the number usually loses.</strong></li>
+        <li>If they don't commit, ask the diagnostic question in 12c: "Is it the total amount, or is it more about the timing?" Their answer tells you exactly which solution to offer.</li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">12b</div><div><span class="stage-title">If the full plan is over $10,000 and they ask to see everything</span></div></div>
+      <div class="helper">Do not provide the entire plan unless they are adamant. A full total ignores insurance and phasing — it's an inaccurate, scary number that shuts patients down.</div>
+      <div class="callout objection">
+        <span class="callout-label">Counter with</span>
+        <div class="say" style="margin-bottom:0;"><div class="line">"I totally get wanting the full picture — that's fair. Here's the honest reason I don't want to just hand you a big total today: that number wouldn't be accurate, and I'd rather not give you a wrong number. It doesn't account for your insurance, and it assumes everything gets done at once, which is almost never how we actually do it. What I <em>can</em> do is show you the full picture in phases — what we tackle first, what it actually costs after your insurance, and what comes later. That way every number you see is real. Sound fair?"</div></div>
+      </div>
+      <div class="coaching"><span class="tag">If they push again</span><ul>
+        <li>Don't fight it. Give a range with a strong caveat: <em>"If you want a ballpark, everything together could land anywhere from [X] to [Y] depending on insurance and how we phase it — but that's exactly why I don't lead with it, because the real number is almost always lower and it depends on choices we make together. Let's start with what's actually accurate: phase one."</em></li>
+      </ul></div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">12c</div><div><span class="stage-title">The Financing Fork</span> &nbsp;<span class="stage-when">— after you ask "total, or timing?"</span></div></div>
+      <div class="helper">They didn't commit, so you asked: "Is it the total amount, or is it more about the timing?" The answer routes everything that follows. Match the solution to the answer.</div>
+      <div class="fork">
+        <div class="fork-col total">
+          <h4>"It's the total"</h4>
+          <div class="means">The size of the number is the problem. Shrink what they're committing to right now.</div>
+          <div class="fork-sol"><span class="sname">1. Phase the treatment</span><span class="sline">"We don't have to do all of this at once — almost nobody does. Let's take care of [the priority] first, and we space the rest out as it makes sense for you."</span></div>
+          <div class="fork-sol"><span class="sname">2. Maximize insurance across years</span><span class="sline">"Your benefits reset in January. If we do phase one now and phase two after the reset, you get two years of insurance instead of one."</span></div>
+          <div class="fork-sol"><span class="sname">3. Separate urgent from elective</span><span class="sline">"Here's what truly needs attention now, and here's what we can keep an eye on." Shrinks the must-do number honestly.</span></div>
+        </div>
+        <div class="fork-col timing">
+          <h4>"It's the timing"</h4>
+          <div class="means">They believe in the treatment — they just can't write the check this month. Spread the same number over time.</div>
+          <div class="fork-sol"><span class="sname">1. Cherry (lead here)</span><span class="sline">"We work with Cherry, which lets you break this into monthly payments — and it's just a soft check, so seeing your options won't affect your credit at all. Want me to pull up what your monthly would look like? Takes about two minutes."</span></div>
+          <div class="fork-sol"><span class="sname">2. Sunbit (fallback)</span><span class="sline">If Cherry doesn't approve or doesn't cover the full amount: "Let me check one more — we also work with Sunbit, which tends to have a little more flexibility. Give me one second."</span></div>
+          <div class="fork-sol"><span class="sname">3. Schedule around their cash flow</span><span class="sline">"Let's book phase one for [date that works] and lock today's pricing." Holds the case without forcing the money now.</span></div>
+        </div>
+      </div>
+      <div class="coaching"><span class="tag">How to run the financing offer</span><ul>
+        <li><strong>Frame the soft check every time.</strong> The #1 reason patients won't even look at financing is fear it'll ding their credit. "Soft check, won't affect your credit" up front removes the objection before they raise it.</li>
+        <li><strong>Show the monthly, not the total.</strong> Once you're in Cherry, the number they should see is the monthly payment — that's the whole point of a timing solution.</li>
+        <li><strong>Don't stack all the options at once.</strong> Offer Cherry, let it run, reach for Sunbit only if Cherry comes up short. Listing every option makes it sound like you're trying hard to get them into debt.</li>
+      </ul></div>
+      <div class="trap">
+        <span class="tag">The trap — match the solution to the answer</span>
+        <p>If it's a <strong>timing</strong> problem and you start phasing the treatment, you just shrank a number that wasn't the obstacle — and may have under-treated someone who'd have financed the whole thing. If it's a <strong>total</strong> problem and you push Cherry, you're asking someone already scared of the number to take on debt for it — that backfires. The diagnostic question only helps if the solution matches the answer.</p>
+      </div>
+    </div>
+    <hr class="divider">
+
+    <div class="stage">
+      <div class="stage-head"><div class="stage-num">13</div><div><span class="stage-title">The Close</span></div></div>
+      <div class="say"><span class="speaker">If they're ready</span><div class="line">"It sounds like [priority item] is the one you want to take care of first. Let's get that on the schedule while you're here — does that work?"</div></div>
+      <div class="say alt"><span class="speaker">If they need time</span><div class="line">"Totally understand. I'll put together a summary of everything we talked about so you've got it in writing. I'll follow up with you in a couple of days — does that work?"</div></div>
+      <div class="coaching"><span class="tag">Why it works</span><ul>
+        <li>End <strong>every</strong> appointment with a clear next step — even if it's just a scheduled follow-up call.</li>
+        <li>A booked follow-up is a win. An open-ended "let me think about it" with no date is not.</li>
+      </ul></div>
+    </div>
+
+    <div class="footer-bar">Total appointment window: 60–75 minutes</div>
+    <div class="colophon">
+      Love Dental &nbsp;·&nbsp; 12685 W Indian School Rd, Suite 102, Avondale, AZ 85392 &nbsp;·&nbsp; 623-270-7420<br>
+      Internal training document — Patient Care Coordinator new patient flow
+    </div>
+  </div>
+</div>
+</body>
+</html>
