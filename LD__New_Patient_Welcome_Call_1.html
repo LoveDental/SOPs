@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Patient Welcome Call | Love Dental</title>
+<style>
+  :root {
+    --ld-blue: #1C5C82;
+    --ld-blue-dark: #14455f;
+    --ld-blue-light: #e8f1f6;
+    --ld-blue-mid: #d5e8f0;
+    --ink: #1f2933;
+    --muted: #5a6b76;
+    --paper: #ffffff;
+    --line: #d9e2e8;
+    --green: #2f6b4f;
+    --green-bg: #e9f3ee;
+    --red: #b3454b;
+    --red-bg: #fbf1f1;
+    --amber: #b5701a;
+    --amber-bg: #fbf2e6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: #f3f6f8; line-height: 1.55; padding: 40px 20px; }
+  .doc { max-width: 820px; margin: 0 auto; background: var(--paper); border-radius: 14px; box-shadow: 0 4px 24px rgba(28,92,130,0.10); overflow: hidden; }
+  .masthead { background: linear-gradient(135deg, var(--ld-blue) 0%, var(--ld-blue-dark) 100%); color: #fff; padding: 38px 44px 32px; }
+  .masthead .brand { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.85; margin-bottom: 10px; }
+  .masthead h1 { font-size: 26px; font-weight: 700; line-height: 1.2; }
+  .masthead .sub { margin-top: 8px; font-size: 14px; opacity: 0.9; font-weight: 400; }
+  .body { padding: 36px 44px 48px; }
+
+  h2.section { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ld-blue); font-weight: 700; margin: 38px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--ld-blue-light); }
+  h2.section:first-of-type { margin-top: 8px; }
+  p.lead { font-size: 15px; color: var(--ink); margin-bottom: 18px; }
+
+  .mindset { background: var(--ld-blue); color: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; font-size: 16px; line-height: 1.5; font-weight: 500; }
+  .mindset .ml { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.8; font-weight: 700; display: block; margin-bottom: 8px; }
+
+  /* do/don't */
+  .compare { display: flex; gap: 14px; margin-bottom: 24px; }
+  .compare-col { flex: 1; border-radius: 10px; padding: 18px 20px; }
+  .compare-col.good { background: var(--green-bg); border-top: 4px solid var(--green); }
+  .compare-col.bad { background: var(--red-bg); border-top: 4px solid var(--red); }
+  .compare-col h4 { font-size: 14px; margin-bottom: 12px; font-weight: 700; }
+  .compare-col.good h4 { color: var(--green); }
+  .compare-col.bad h4 { color: var(--red); }
+  .compare-col ul { list-style: none; }
+  .compare-col li { font-size: 13px; margin-bottom: 9px; line-height: 1.4; color: #2c3a44; font-style: italic; }
+
+  /* script blocks */
+  .script { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+  .script .shead { background: var(--ld-blue); color: #fff; padding: 11px 18px; font-weight: 700; font-size: 14px; }
+  .script .shead .sub2 { font-weight: 400; opacity: 0.85; font-size: 12px; }
+  .script .srow { display: flex; border-top: 1px solid var(--line); }
+  .script .srow:first-of-type { border-top: none; }
+  .script .slabel { flex: 0 0 120px; padding: 13px 16px; font-weight: 700; font-size: 10.5px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ld-blue-dark); background: var(--ld-blue-light); }
+  .script .stext { flex: 1; padding: 13px 16px; font-size: 14px; color: #102733; line-height: 1.5; }
+  .script .stext em { color: var(--muted); }
+
+  .single { background: var(--ld-blue-mid); border-radius: 10px; padding: 18px 22px; margin-bottom: 16px; }
+  .single .slabel { font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; color: var(--ld-blue-dark); display: block; margin-bottom: 8px; }
+  .single .stext { font-size: 14px; color: #102733; line-height: 1.55; }
+
+  .note-list { margin: 8px 0 18px; padding-left: 4px; }
+  .note-list li { font-size: 13.5px; color: var(--muted); margin-bottom: 7px; line-height: 1.5; list-style: none; padding-left: 18px; position: relative; }
+  .note-list li::before { content: "•"; position: absolute; left: 0; color: var(--ld-blue); font-weight: 700; }
+  .note-list li.strong { color: var(--ink); font-weight: 600; font-style: italic; }
+
+  /* tables */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13.5px; }
+  table th { background: var(--ld-blue); color: #fff; text-align: left; padding: 11px 14px; font-size: 12px; letter-spacing: 0.5px; }
+  table td { padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; color: #2c3a44; }
+  table tr:nth-child(even) td { background: #f7fafb; }
+  table td.k { font-weight: 700; color: var(--ld-blue-dark); width: 32%; }
+  table td .say { color: var(--ink); }
+  table td .flag { color: var(--red); font-weight: 700; font-size: 12.5px; display: block; margin-top: 4px; }
+
+  .coach-note { background: #102733; color: #e8f1f6; border-radius: 10px; padding: 22px 26px; margin: 30px 0 10px; }
+  .coach-note .clabel { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #7fb3d1; font-weight: 700; margin-bottom: 10px; }
+  .coach-note p { font-size: 14px; line-height: 1.6; }
+  .coach-note strong { color: #fff; }
+
+  .colophon { text-align: center; font-size: 12px; color: var(--muted); margin-top: 28px; line-height: 1.6; }
+  @media (max-width: 600px) { .compare { flex-direction: column; } .script .srow { flex-direction: column; } .script .slabel { flex-basis: auto; } table td.k { width: auto; } }
+  @media print { body { background: #fff; padding: 0; } .doc { box-shadow: none; border-radius: 0; max-width: 100%; } .script, .compare, .compare-col, table tr { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="masthead">
+    <div class="brand">Love Dental</div>
+    <h1>New Patient Welcome Call</h1>
+    <div class="sub">Phone Script &amp; Training Guide</div>
+  </div>
+  <div class="body">
+
+    <h2 class="section">Purpose of This Call</h2>
+    <p class="lead">This is <strong>NOT</strong> a confirmation call. The patient has an appointment. We are not asking them to confirm it — we are welcoming them and building confidence that they are coming to the right place. Every word should communicate warmth, readiness, and that we are genuinely looking forward to them.</p>
+    <div class="mindset"><span class="ml">The One-Sentence Mindset</span>"I am calling to make them feel like a VIP before they walk through the door — not to ask them something."</div>
+
+    <h2 class="section">The Do vs. Don't Word List</h2>
+    <p class="lead">Train yourself on these word swaps first. The wrong words turn a welcome call into a confirmation call.</p>
+    <div class="compare">
+      <div class="compare-col good">
+        <h4>✓ Say This</h4>
+        <ul>
+          <li>"We're really looking forward to meeting you"</li>
+          <li>"We have everything ready for you"</li>
+          <li>"We just wanted to reach out and welcome you"</li>
+          <li>"Our team is excited to take great care of you"</li>
+          <li>"Please don't hesitate to reach out if anything comes up"</li>
+          <li>"We want to make sure your first visit is as smooth as possible"</li>
+          <li>"We'll take care of you"</li>
+        </ul>
+      </div>
+      <div class="compare-col bad">
+        <h4>✗ Avoid This</h4>
+        <ul>
+          <li>"Are you still coming in? / Can you confirm?"</li>
+          <li>"I'm calling to remind you about your appointment"</li>
+          <li>"We just need to confirm your appointment"</li>
+          <li>"Make sure you don't forget"</li>
+          <li>"We need you to call us back to confirm"</li>
+          <li>"Is there any chance you need to reschedule?"</li>
+          <li>"Will you be able to make it?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="section">Phone Script — Patient Answers</h2>
+    <p class="lead">Read this naturally — don't sound scripted. The goal is warm and confident, not robotic.</p>
+    <div class="script">
+      <div class="shead">Opening &nbsp;<span class="sub2">— first 5 seconds matter most</span></div>
+      <div class="srow"><div class="slabel">Open</div><div class="stext">"Hi, may I speak with [Patient First Name]?"</div></div>
+      <div class="srow"><div class="slabel">They answer</div><div class="stext">"Hi [NAME]! This is Heather calling from Love Dental, am I interrupting?"</div></div>
+      <div class="srow"><div class="slabel">Brief answer</div><div class="stext"><em>[Respond genuinely — 1 sentence max.]</em> "Wonderful! I'm calling because…"</div></div>
+    </div>
+    <div class="script">
+      <div class="shead">The Welcome &nbsp;<span class="sub2">— core of the call</span></div>
+      <div class="srow"><div class="slabel">Welcome</div><div class="stext">"I want to personally reach out and welcome you to Love Dental. We're really looking forward to having you in on [Day] at [Time]."</div></div>
+      <div class="srow"><div class="slabel">Readiness</div><div class="stext">"Our team has everything ready for you [NAME], and I want to make sure your first visit with us is as smooth and comfortable as possible. Is there anything you would like our Doctor or our team to know beforehand?"</div></div>
+      <div class="srow"><div class="slabel">Open Door</div><div class="stext">"If you have any questions before you come in — whether it's about parking, what to bring, anything at all — please don't hesitate to give us a call. We're happy to help."</div></div>
+    </div>
+    <div class="script">
+      <div class="shead">Close &nbsp;<span class="sub2">— warm and brief</span></div>
+      <div class="srow"><div class="slabel">Close</div><div class="stext">"Other than that, we just wanted to say we're all ready for you and we're excited to meet you and take great care of you. We'll see you [Day]!"</div></div>
+      <div class="srow"><div class="slabel">Sign Off</div><div class="stext">"Have a wonderful day/evening, [NAME]. We'll see you soon!"</div></div>
+    </div>
+
+    <h2 class="section">When There Is No Answer</h2>
+    <div class="single">
+      <span class="slabel">Voicemail Script &nbsp;— leave only if the mailbox is clearly active. Under 30 seconds. Warm, not urgent.</span>
+      <div class="stext">"Hi [Name], this is Heather calling from Love Dental. I just wanted to personally reach out and welcome you — we're really looking forward to having you in on [Day] at [Time]. Our team has everything ready for you, and I want to make sure your visit is smooth and comfortable. If you have any questions before then, please don't hesitate to give us a call at 623-270-7420. We can't wait to meet you. Have a great day!"</div>
+    </div>
+    <div class="single">
+      <span class="slabel">Text Script &nbsp;— send ONLY if no voicemail was left or the mailbox was full. Do not double up.</span>
+      <div class="stext">"Hi [NAME]! This is Heather from Love Dental. I'm reaching out to welcome you ahead of your appointment on [Day] at [Time]. 😊 Our team has everything ready for you and we're really looking forward to meeting you. If you have any questions before you come in, feel free to reply here or give us a call at 623-270-7420. See you soon!"</div>
+    </div>
+    <p class="lead" style="font-weight:600;color:var(--ld-blue-dark);margin-bottom:8px;">Notes on the text:</p>
+    <ul class="note-list">
+      <li>Keep the emoji to one — it warms the tone without looking unprofessional.</li>
+      <li class="strong">No questions. No "please confirm." No "let us know if you can make it."</li>
+      <li>If they reply with a cancellation or rescheduling request, hand that off per normal scheduling protocol. (Refer to cancellation scripts.)</li>
+    </ul>
+
+    <h2 class="section">Call Timing &amp; Logistics</h2>
+    <table>
+      <tr><th>When to Call</th><th>Guidelines</th></tr>
+      <tr><td class="k">New Patients</td><td>2 days before the appointment. Not same-day unless booked last-minute.</td></tr>
+      <tr><td class="k">Emergency Patients</td><td>Within 1 hour of booking. Reassurance matters most for this group — they're already in pain or anxious. Lead with "we're ready for you."</td></tr>
+      <tr><td class="k">Best Call Times</td><td>10 AM–12 PM or 4–6 PM. Avoid the typical lunch hour (12–1) unless necessary.</td></tr>
+      <tr><td class="k">If No Answer</td><td>Leave voicemail OR send text — not both. Log the attempt in Open Dental.</td></tr>
+      <tr><td class="k">Call Duration Target</td><td>60–90 seconds. This is a welcome call, not a conversation. Be warm, be brief, get off.</td></tr>
+    </table>
+
+    <h2 class="section">Handling Common Responses</h2>
+    <table>
+      <tr><th>If Patient Says…</th><th>You Say…</th></tr>
+      <tr><td class="k">"Oh, I forgot about that"</td><td><span class="say">"Perfect timing then! We have you on [Day] at [Time] — we're looking forward to it."</span><span class="flag">Do NOT say "so can you still make it?"</span></td></tr>
+      <tr><td class="k">"I actually need to reschedule"</td><td><span class="say">"Absolutely, no problem at all! I can move your reservation to XX or XX, what works better for you?"</span> — then handle per normal scheduling protocol.</td></tr>
+      <tr><td class="k">"What should I bring?"</td><td><span class="say">"Just a valid ID and your insurance card if you have one. You can also fill out your paperwork online beforehand to save time at the appointment — I can send you that link if you'd like!"</span> Then note it in Open Dental.</td></tr>
+      <tr><td class="k">"I'm really nervous"</td><td><span class="say">"I completely understand, and you're in great hands. Dr. Abedini is wonderful with patients who feel anxious — at Love Dental we place a lot of emphasis on anxious patients because they need love too! We'll make sure you're comfortable every step of the way."</span></td></tr>
+      <tr><td class="k">"I'm in a lot of pain" (emergency)</td><td><span class="say">"We are going to take great care of you. We have you all set for [Time] and we're ready for you. Dr. Abedini is planning to do what is necessary to take care of you and get you out of pain."</span></td></tr>
+    </table>
+
+    <div class="coach-note">
+      <div class="clabel">Kal's Coaching Note — Read This Once a Week</div>
+      <p>The welcome call is the first impression after the patient says yes. The automated system got them to book. <strong>YOU are what makes them feel like they made the right choice.</strong> One warm, genuine phone call is worth more than 10 reminder texts. The patient should hang up thinking "these people actually care" — not "okay, I guess my appointment is confirmed." If they cancel AFTER this call, at least they cancelled as a warm patient, not a cold one. The no-show rate on patients who received a genuine welcome call is significantly lower. Once that relationship is formed, it is much easier to reconnect with them later.</p>
+    </div>
+
+    <div class="colophon">
+      Love Dental &nbsp;·&nbsp; 12685 W Indian School Rd, Suite 102, Avondale, AZ &nbsp;·&nbsp; 623-270-7420 &nbsp;·&nbsp; LoveDentalAZ.com<br>
+      Internal training document — New Patient Welcome Call
+    </div>
+  </div>
+</div>
+</body>
+</html>
