@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Retention & Reactivation Protocol | Love Dental</title>
+<style>
+  :root {
+    --ld-blue: #1C5C82; --ld-blue-dark: #14455f; --ld-blue-light: #e8f1f6; --ld-blue-mid: #d5e8f0;
+    --ink: #1f2933; --muted: #5a6b76; --paper: #ffffff; --line: #d9e2e8;
+    --green: #2f6b4f; --green-bg: #e9f3ee; --red: #b3454b; --red-bg: #fbf1f1; --amber: #b5701a; --amber-bg: #fbf2e6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: #f3f6f8; line-height: 1.55; padding: 40px 20px; }
+  .doc { max-width: 840px; margin: 0 auto; background: var(--paper); border-radius: 14px; box-shadow: 0 4px 24px rgba(28,92,130,0.10); overflow: hidden; }
+  .masthead { background: linear-gradient(135deg, var(--ld-blue) 0%, var(--ld-blue-dark) 100%); color: #fff; padding: 38px 44px 32px; }
+  .masthead .brand { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.85; margin-bottom: 10px; }
+  .masthead h1 { font-size: 25px; font-weight: 700; line-height: 1.2; }
+  .masthead .sub { margin-top: 8px; font-size: 14px; opacity: 0.9; }
+  .body { padding: 36px 44px 48px; }
+
+  .ethos { background: var(--ld-blue-light); border-left: 4px solid var(--ld-blue); border-radius: 8px; padding: 18px 22px; margin-bottom: 8px; }
+  .ethos li { list-style: none; font-size: 14.5px; color: var(--ld-blue-dark); font-weight: 600; margin-bottom: 8px; padding-left: 20px; position: relative; }
+  .ethos li:last-child { margin-bottom: 0; }
+  .ethos li::before { content: "▸"; position: absolute; left: 0; color: var(--ld-blue); }
+
+  h2.part { font-size: 18px; font-weight: 700; color: #fff; background: var(--ld-blue); border-radius: 8px; padding: 12px 20px; margin: 40px 0 18px; }
+  h2.part .pn { opacity: 0.7; font-weight: 400; font-size: 14px; }
+  h3.sub { font-size: 15px; font-weight: 700; color: var(--ld-blue-dark); margin: 26px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--ld-blue-light); }
+  p.lead { font-size: 14.5px; color: var(--ink); margin-bottom: 16px; }
+  p.lead.em { font-weight: 600; color: var(--ld-blue-dark); }
+
+  .rule-box { border: 2px solid var(--ld-blue); border-radius: 10px; padding: 18px 22px; margin-bottom: 16px; }
+  .rule-box .rlabel { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ld-blue); font-weight: 700; margin-bottom: 10px; }
+  .rule-box ul { margin-left: 18px; }
+  .rule-box li { font-size: 14px; margin-bottom: 7px; line-height: 1.5; color: var(--ink); }
+  .rule-box li strong { color: var(--ld-blue-dark); }
+  .rule-box.resist { border-color: var(--amber); }
+  .rule-box.resist .rlabel { color: var(--amber); }
+
+  ol.steps { margin: 0 0 16px 20px; }
+  ol.steps li { font-size: 14px; margin-bottom: 10px; line-height: 1.5; color: #2c3a44; }
+  ol.steps li em { color: var(--ld-blue-dark); font-style: italic; }
+
+  ul.bullets { margin: 0 0 16px 20px; }
+  ul.bullets li { font-size: 14px; margin-bottom: 8px; line-height: 1.5; color: #2c3a44; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
+  table th { background: var(--ld-blue); color: #fff; text-align: left; padding: 10px 12px; font-size: 11.5px; letter-spacing: 0.3px; }
+  table td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; color: #2c3a44; }
+  table tr:nth-child(even) td { background: #f7fafb; }
+  table td.k { font-weight: 700; color: var(--ld-blue-dark); }
+  .table-cap { font-size: 13px; font-weight: 700; color: var(--ld-blue-dark); margin: 6px 0 8px; }
+
+  .cadence-note { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 16px; padding-left: 4px; }
+  .big-cadence { background: var(--ld-blue-mid); border-radius: 8px; padding: 14px 20px; font-size: 15px; font-weight: 700; color: var(--ld-blue-dark); text-align: center; margin-bottom: 16px; }
+
+  /* script cards */
+  .script { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+  .script .shead { background: var(--ld-blue); color: #fff; padding: 10px 18px; font-weight: 700; font-size: 13.5px; }
+  .script .sbody { padding: 14px 18px; font-size: 14px; color: #102733; line-height: 1.55; font-style: italic; background: var(--ld-blue-light); }
+  .script .swhy { padding: 11px 18px; font-size: 12.5px; color: var(--muted); line-height: 1.5; border-top: 1px solid var(--line); background: #f7fafb; }
+  .script .swhy strong { color: var(--ld-blue-dark); font-style: normal; }
+
+  .callout-tip { background: var(--amber-bg); border-left: 4px solid var(--amber); border-radius: 8px; padding: 14px 18px; margin-bottom: 16px; font-size: 13.5px; color: #5a4423; line-height: 1.55; }
+  .callout-tip strong { color: var(--amber); }
+
+  .celebrate { background: var(--green-bg); border-left: 4px solid var(--green); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; font-size: 14px; color: #1f4733; line-height: 1.6; font-style: italic; }
+
+  .coach-note { background: #102733; color: #e8f1f6; border-radius: 10px; padding: 22px 26px; margin: 30px 0 10px; }
+  .coach-note .clabel { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #7fb3d1; font-weight: 700; margin-bottom: 10px; }
+  .coach-note p { font-size: 14px; line-height: 1.6; }
+  .coach-note strong { color: #fff; }
+
+  .colophon { text-align: center; font-size: 12px; color: var(--muted); margin-top: 28px; line-height: 1.6; }
+  @media print { body { background: #fff; padding: 0; } .doc { box-shadow: none; border-radius: 0; max-width: 100%; } .script, table tr, .rule-box, .celebrate { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="masthead">
+    <div class="brand">Love Dental</div>
+    <h1>Patient Retention &amp; Reactivation Protocol</h1>
+    <div class="sub">Team Operating Standard &nbsp;·&nbsp; Front Office, Hygiene &amp; Clinical</div>
+  </div>
+  <div class="body">
+
+    <ul class="ethos">
+      <li>The cheapest patient to keep is the one already in the chair.</li>
+      <li>Reactivation is damage control; the protocols below are built so we rarely need it.</li>
+      <li>Our standard is simple: nobody leaves without a reason to come back.</li>
+      <li>Every patient walks out with their next two appointments booked.</li>
+    </ul>
+
+    <h2 class="part">Part 1 <span class="pn">— The Never-Lose-Them Standard</span></h2>
+    <p class="lead em">This is the core rule. If we follow it, attrition drops before reactivation ever enters the picture.</p>
+
+    <div class="rule-box">
+      <div class="rlabel">The Rule</div>
+      <ul>
+        <li><strong>Every patient leaves with 2 appointments booked</strong></li>
+        <li>At least <strong>1 hygiene and 1 restorative</strong></li>
+        <li>Unless they have completed all treatment</li>
+        <li>If they completed all treatment, offer <strong>10% off a nightguard or whitening</strong> as a "thank you for trusting us with your care."</li>
+      </ul>
+    </div>
+
+    <div class="rule-box resist">
+      <div class="rlabel">If They Resist</div>
+      <ul>
+        <li>At least get them on the hygiene schedule</li>
+        <li>Place a note in the appointment for the hygienist that the patient still needs convincing/closing to commit to the restorative appointment</li>
+        <li>Tell the patient: "Absolutely! I'm going to follow up with you next Tuesday to answer any questions and get you taken care of."</li>
+        <li><strong>No asking. No hesitation.</strong> We aren't doing them a favor — following up is our standard protocol for every patient.</li>
+      </ul>
+    </div>
+
+    <h3 class="sub">How to Schedule SRP (Scaling &amp; Root Planing) Patients</h3>
+    <ol class="steps">
+      <li>Book both SRP appointments before they leave (instead of the standard hygiene + restorative pairing).</li>
+      <li>After the first-side SRP, while they wait for the second side, schedule their 4-week re-evaluation. Now they have their second and third appointment on the books.</li>
+      <li>After the second-side SRP, book their first restorative appointment. Now they have their third and fourth appointment booked. <em>"Janice, now that we're on our way to getting your gums stable, Dr. Abedini really wants to address that lower right molar before it gets worse and the treatment changes."</em></li>
+      <li>From that point forward, they always carry two future appointments: a perio maintenance visit and a restorative visit.</li>
+      <li>The only exception: the patient has completed all planned treatment.</li>
+    </ol>
+
+    <h3 class="sub">Prophy (Routine Hygiene) Patients</h3>
+    <ul class="bullets">
+      <li>Always schedule 1 hygiene appointment and 1 restorative appointment before they leave.</li>
+      <li>The only exception: the patient has completed all planned treatment.</li>
+    </ul>
+
+    <h3 class="sub">Patients Who Have Completed Treatment</h3>
+    <ul class="bullets">
+      <li>Thank them by name for "trusting us with your care — your trust means so much to us."</li>
+      <li>Offer 10% off a nightguard or whitening as a special gift for completing their treatment.</li>
+      <li>Still book their next hygiene appointment — completed treatment does not mean completed relationship.</li>
+    </ul>
+
+    <h3 class="sub">Quick Reference — What Every Patient Leaves With</h3>
+    <p class="table-cap">Standard (Prophy) Track</p>
+    <table>
+      <tr><th>Here For</th><th>Next Appt</th><th>Second Appt</th></tr>
+      <tr><td class="k">New Patient Experience</td><td>Prophy</td><td>Restorative</td></tr>
+      <tr><td class="k">Prophy</td><td>Restorative</td><td>Prophy</td></tr>
+      <tr><td class="k">Restorative</td><td>Restorative</td><td>Prophy</td></tr>
+      <tr><td class="k">Final Restorative Txt</td><td colspan="2">Prophy Appt + 10% nightguard or whitening</td></tr>
+    </table>
+    <p class="table-cap">Perio (SRP) Track</p>
+    <table>
+      <tr><th>Here For</th><th>Next Appt</th><th>Second Appt</th></tr>
+      <tr><td class="k">New Patient Experience</td><td>Right SRP</td><td>Left SRP</td></tr>
+      <tr><td class="k">Right SRP</td><td>Left SRP</td><td>Restorative</td></tr>
+      <tr><td class="k">Left SRP</td><td>Restorative</td><td>4 Week Re-eval</td></tr>
+      <tr><td class="k">Restorative</td><td>Restorative</td><td>Perio Maintenance</td></tr>
+      <tr><td class="k">4 Week Re-eval</td><td>Restorative</td><td>Perio Maintenance</td></tr>
+      <tr><td class="k">Perio Maintenance</td><td>Restorative</td><td>Perio Maintenance</td></tr>
+      <tr><td class="k">Final Restorative Txt</td><td colspan="2">Prophy/Perio Appt + 10% nightguard or whitening</td></tr>
+    </table>
+
+    <p class="lead em">Patients who finished all recommended restorative treatment:</p>
+    <div class="celebrate">"Janette, Dr. Abedini wanted us to make sure we celebrated with you today — you finished everything on your treatment plan and <strong>that is a big deal!</strong> Most people don't follow through the way you did. From here we're shifting into protection mode — your hygiene visits are what lock in everything you just accomplished. And to celebrate hitting this milestone, we'd love to offer you 10% off a nightguard or whitening, our way of saying thank you for trusting us with your smile."</div>
+    <div class="callout-tip"><strong>One rule for your team:</strong> The compliment has to feel personal, not scripted. Train them to make eye contact and slow down on "that is a big deal." If it's rushed it reads fake and the whole thing collapses.</div>
+
+    <h2 class="part">Part 2 <span class="pn">— The Follow-Up Cadence</span></h2>
+    <p class="lead">When a patient has outstanding treatment and hasn't booked, or misses/cancels, we follow a fixed contact rhythm. Consistency is the whole point — no patient slips because someone forgot.</p>
+    <div class="big-cadence">2 days → 2 days → 2 weeks → 2 weeks → 2 months → then hold until the next hygiene visit</div>
+    <table>
+      <tr><th>Touch</th><th>When</th><th>Channel</th><th>Goal</th></tr>
+      <tr><td class="k">1</td><td>Day 2 after visit/miss</td><td>Text</td><td>Warm, specific, doctor-driven reason</td></tr>
+      <tr><td class="k">2</td><td>Day 4 (2 days later)</td><td>Text or call</td><td>Concern, specific, doctor-driven reason</td></tr>
+      <tr><td class="k">3</td><td>+2 weeks</td><td>Call</td><td>Conversation, handle objection, find solution</td></tr>
+      <tr><td class="k">4</td><td>+2 weeks</td><td>Text</td><td>Soft re-touch, new angle</td></tr>
+      <tr><td class="k">5</td><td>+2 months</td><td>Text or call</td><td>Last active push before hold</td></tr>
+      <tr><td class="k">Hold</td><td>Until next hygiene</td><td>In person</td><td>Doctor/hygienist re-presents in chair</td></tr>
+    </table>
+    <p class="cadence-note">Log every touch in the patient's file. If they book at any point, stop the cadence. If they ask to stop being contacted, honor it and note it.</p>
+    <p class="lead em">Tips:</p>
+    <ol class="steps">
+      <li>Warm, specific, doctor-driven reason.</li>
+      <li>Be specific. Review (1) chart, (2) photos, (3) notes and explain why this is serious.</li>
+      <li>Offer two specific time slots.</li>
+      <li>In your mind, assume you're closing the deal — talk that way instead of being unsure/hesitant.</li>
+      <li>After months of no contact, hold off until they come in for their next hygiene appointment.</li>
+    </ol>
+
+    <h2 class="part">Part 3 <span class="pn">— The Scripts</span></h2>
+    <p class="lead">These are built on real persuasion principles, not pressure. Every script does three things: names something specific to THIS patient, frames the doctor as personally concerned about them, and closes assumptively with two time options instead of asking yes or no. Personalize the name and the tooth/treatment — personalization pierces through the spam feeling.</p>
+
+    <h3 class="sub">The Psychology Toolkit We're Using</h3>
+    <ul class="bullets">
+      <li><strong>Personalization</strong> — naming the exact tooth/finding makes it impossible to feel like a mass text.</li>
+      <li><strong>Authority transfer</strong> — "Dr. Abedini asked me to reach out" carries the doctor's weight, not the front desk's.</li>
+      <li><strong>Loss aversion</strong> — patients act harder to avoid losing something (a simpler/cheaper fix) than to gain something.</li>
+      <li><strong>Assumptive close</strong> — offering two slots skips the "do you want to come in" yes/no and moves straight to "which works."</li>
+      <li><strong>Specific, near-term windows</strong> — "Wednesday morning or Thursday afternoon" beats "sometime soon" every time.</li>
+    </ul>
+
+    <h3 class="sub">Typical Path for Dental Problems — Why It's a Big Deal</h3>
+    <table>
+      <tr><th>Original Problem</th><th>Ideal Txt Now</th><th>Txt Needed Later</th><th>Why It Matters</th></tr>
+      <tr><td class="k">Bacterial Cavity</td><td>Filling</td><td>Crown</td><td>Becomes painful + tooth could break</td></tr>
+      <tr><td class="k">Large Cavity</td><td>Crown</td><td>Root Canal</td><td>Becomes painful + infected</td></tr>
+      <tr><td class="k">Fracture</td><td>Crown</td><td>Extraction / Implant</td><td>Tooth could break and we'd lose it</td></tr>
+      <tr><td class="k">Teeth Missing</td><td>Implant</td><td>Braces</td><td>Teeth shift + cause a lot of bone loss</td></tr>
+      <tr><td class="k">Crowding</td><td>Invisalign</td><td>A lot of repair work</td><td>Multiple teeth wear/chip/fracture/recession</td></tr>
+      <tr><td class="k">Grinding</td><td>Nightguard</td><td>Multiple Crowns</td><td>Teeth don't grow back — only a crown can repair it</td></tr>
+      <tr><td class="k">Broken Roots</td><td>Extraction</td><td>ER</td><td>Broken roots lead to body-wide infection</td></tr>
+      <tr><td class="k">Gingivitis</td><td>Cleaning</td><td>Deep Cleanings</td><td>Worsens serious health conditions</td></tr>
+      <tr><td class="k">Gum Infection</td><td>Deep Cleaning</td><td>Gum Surgery or Extractions</td><td>Worsens serious health conditions</td></tr>
+    </table>
+
+    <h3 class="sub">Restorative Reactivation Scripts</h3>
+    <p class="lead" style="font-size:13.5px;color:var(--muted);">For patients with outstanding restorative treatment (fillings, crowns, etc.) who haven't booked or have lapsed.</p>
+
+    <div class="script"><div class="shead">1. The Doctor's Personal Concern</div><div class="sbody">"Hi [Name], it's Tabetha at Love Dental. Dr. Abedini asked me to reach out because he's been thinking about your [upper-right silver filling]. Right now it's a straightforward fix with a [crown], but he's concerned if it keeps going it won't be as easy or cheap to fix and might need [a root canal]. He told me to find you time this week. I can get you in Wednesday morning or Thursday afternoon. Which one do you prefer?"</div><div class="swhy"><strong>Why it works:</strong> Authority transfer + loss aversion (simple now vs. bigger later) + assumptive two-slot close. Stakes made concrete instead of vague.</div></div>
+
+    <div class="script"><div class="shead">2. The Window-Closing Angle</div><div class="sbody">"Hi [Name], Tabetha from Love Dental. Quick heads-up on your cavities. You have a few at various stages and most are right at the point where a [filling] still solves it. Dr. Abedini is most concerned about the ones on your lower left and says waiting much longer and that same tooth usually needs a [crown/root canal]. I'm working on finding availabilities for our most urgent patients now, so I've got Tuesday at 10 or Friday at 2 available for you — if you tell me which is better I'll save that spot."</div><div class="swhy"><strong>Why it works:</strong> Loss aversion made financial (small fix vs. expensive fix) — the strongest motivator for restorative. Specific slots close it.</div></div>
+
+    <div class="script"><div class="shead">3. The Urgency Nudge</div><div class="sbody">"Hi [Name], it's Tabetha at Love Dental. Dr. Abedini discussed your treatment with me this morning and is particularly concerned about the lower left molar. He said the fracture is manageable now but fractures are unpredictable and will break without notice at the most random moment — then we're having an implant conversation. He wants me to get you in for a crown as soon as possible. Can you make it next Monday at 10 or Wednesday at 11?"</div><div class="swhy"><strong>Why it works:</strong> Commitment &amp; consistency — people hate abandoning something they've already invested in. Frames finishing as protecting past effort.</div></div>
+
+    <div class="script"><div class="shead">4. The Urgency + Scarcity Nudge</div><div class="sbody">"Hi [Name], it's Tabetha at Love Dental. Dr. Abedini discussed your treatment with me this morning and is particularly concerned about the [lower left molar]. He said the [fracture is manageable now but fractures are unpredictable and will break without notice at the most random moment — then we're having an implant conversation]. He wants me to get you in for a crown as soon as possible but we're booked this week. Can you make it next Monday at 10 or Wednesday at 11?"</div><div class="swhy"><strong>Why it works:</strong> Commitment &amp; consistency + honest scarcity (genuinely booked this week) raises the value of the slot offered.</div></div>
+
+    <div class="script"><div class="shead">5. The Insurance-Timing Hook</div><div class="sbody">"Hi [Name], Tabetha from Love Dental. I'm reviewing your account and realized you've still got insurance benefits available this year for the [crown you need for the big cavity on your upper right]. Those benefits reset and disappear at year-end. It'd be a shame to leave that on the table when the tooth needs the work anyway. I remember you told me you like mornings — I can get you in Monday at 10am or Thursday at 8am."</div><div class="swhy"><strong>Why it works:</strong> Loss aversion tied to expiring benefits + a real deadline. Works hardest in Q4. Honest, not manufactured urgency.</div></div>
+
+    <div class="script"><div class="shead">6. The Symptom Check-In</div><div class="sbody">"Hi [Name], it's Tabetha at Love Dental. Dr. Abedini wanted me to follow up and check if your tooth has been giving you any sensitivity or discomfort yet. Those types of cavities tend to spread and become more uncomfortable the longer you wait. He wants us to be ahead of it and asked me to work with your schedule to get you in next week. Next week I have a Tuesday at 9:30am or a Thursday 1:30pm. Which one do you prefer?"</div><div class="swhy"><strong>Why it works:</strong> Opens a two-way conversation instead of a pitch. Self-diagnosis pulls them in; if they report a symptom, they close themselves.</div></div>
+
+    <div class="script"><div class="shead">7. The Short-and-Direct (for busy patients)</div><div class="sbody">"Hi [Name], it's Tabetha at Love Dental. Dr. Abedini wants me to follow up with you about the fractured tooth on the lower right before it gets worse and the treatment changes. I want to get you in Wednesday at 1 or Thursday at 9. I'm working on scheduling our most urgent patients so let me know which one is better and I'll save that for you now."</div><div class="swhy"><strong>Why it works:</strong> Respects the patient who hates long texts. Low friction, two slots, you do the work. Great for high-earners/professionals.</div></div>
+
+    <div class="script"><div class="shead">8. The Re-Care After a No-Show</div><div class="sbody">"Hi [Name], it's Tabetha at Love Dental — we missed you for the [fillings you need on the upper left] and totally get that life gets busy. We always joke that bacteria doesn't understand our daily struggle, but we do and we care! Dr. Abedini wants to fix it before it progresses. I saved you priority booking: Tuesday at 8am or Wednesday at 2pm. Which works better this time?"</div><div class="swhy"><strong>Why it works:</strong> Removes shame (reduces avoidance), keeps the door warm, reasserts the clinical reason, and offers a fresh assumptive close.</div></div>
+
+    <div class="script"><div class="shead">9. Urgency but Quick</div><div class="sbody">"Hi [First], it's Love Dental. Dr. [Doctor] had recommended [treatment, plain language — e.g. 'a crown on one of your back teeth'] at your last visit. We'd love to get you taken care of before it turns into something bigger. I only have an opening Monday at 1:30p or Thursday at 8am. Which one works with your schedule?"</div><div class="swhy"><strong>Why it works:</strong> Keeps the door warm, reasserts the clinical reason, and offers a fresh assumptive close with honest scarcity.</div></div>
+
+    <div class="script"><div class="shead">10. "How Much Will It Cost?"</div><div class="sbody">"Great question. It depends on your insurance, and based on what they're estimating it looks like they're covering [XXXX] while your portion is the remaining [XXXX]. Good news is I'm able to split your portion into easy monthly payments now. I can save Thursday at 1:30p for you, and if you come in 15 minutes early we can play around with the calculator to see which payment plan is your favorite."</div><div class="swhy"><strong>Why it works:</strong> Answers cost without sticker shock, reframes to monthly, and closes with a specific slot plus a low-pressure reason to arrive early.</div></div>
+
+    <h3 class="sub">Hygiene Reactivation Scripts</h3>
+    <p class="lead" style="font-size:13.5px;color:var(--muted);">For patients overdue for a cleaning, perio maintenance, or who've drifted off recall.</p>
+
+    <div class="script"><div class="shead">1. The Perio Maintenance Reminder</div><div class="sbody">"Hi [Name], it's Tabetha at Love Dental. Because of the gum treatment you completed, Kayla recommended a 3-month maintenance cycle. Staying on schedule is the single biggest thing protecting the investment you already made from needing another deep cleaning. I can reserve your professional cleaning for Monday at 8am or Wednesday at 2:30pm. Which one is better?"</div><div class="swhy"><strong>Why it works:</strong> Ties the visit to protecting an investment they already made. Perio patients drift fastest; this reframes maintenance as defense, not optional.</div></div>
+
+    <div class="script"><div class="shead">2. The "It's Been a While" Warm Reach</div><div class="sbody">"Hi [Name], it's Tabetha from Love Dental — we've missed seeing you! It's been about [X months] since your last cleaning, and we want to make sure nothing's quietly building up between visits. That's how a routine professional cleaning becomes a deep cleaning later. I can reserve this Thursday at 8am or Monday at 1pm for you — let me know which is better."</div><div class="swhy"><strong>Why it works:</strong> Warm + early-detection framing (loss aversion, gentle). The personal "we've missed you" rebuilds the relationship before the ask.</div></div>
+
+    <div class="script"><div class="shead">3. The New-Year / Benefits Reset</div><div class="sbody">"Hi [Name], it's Tabetha at Love Dental. Your dental benefits just reset, which means your cleaning is likely covered at 100%! I'd love to get you in before the calendar fills up this time of year. I can reserve this Thursday at 8am or Monday at 1pm for you — let me know which is better."</div><div class="swhy"><strong>Why it works:</strong> Anchors on a covered, easy 'yes' visit. Low-stakes entry point that gets lapsed patients back through the door and re-engaged.</div></div>
+
+    <div class="script"><div class="shead">4. The Family-Anchor Script</div><div class="sbody">"Hi [Name], it's Tabetha from Love Dental. I was booking [family member]'s cleaning and noticed you're overdue for yours too. Want me to get you both in around the same time so it's one trip? I have [Wednesday June 15 at 10am] with two openings back-to-back."</div><div class="swhy"><strong>Why it works:</strong> Convenience + social anchoring. Bundling with a family member already booked makes saying yes nearly automatic.</div></div>
+
+    <div class="script"><div class="shead">5. The Health-Connection Angle</div><div class="sbody">"Hi [Name], it's Tabetha at Love Dental. I'm reaching out because we're behind on your professional cleaning, and since gum health is tied to things like heart health and blood sugar, Dr. Abedini likes to keep our patients on track with their health. I can reserve this Thursday at 8am or Monday at 1pm for you — let me know which is better."</div><div class="swhy"><strong>Why it works:</strong> Elevates a cleaning from cosmetic to whole-body health. Raises perceived stakes for patients who deprioritize 'just a cleaning.'</div></div>
+
+    <div class="script"><div class="shead">6. The Comeback (long-lapsed, 12+ months)</div><div class="sbody">"Hi [Name], [Your Name] at Love Dental. It's been a while and we'd genuinely love to have you back — no lecture, promise. Things may have changed since your last visit, so Dr. Abedini suggests a fresh check and cleaning to reset the baseline. First step's easy. Can I offer you [day] or [day]?"</div><div class="swhy"><strong>Why it works:</strong> Disarms the guilt that keeps long-lapsed patients away ('no lecture, promise'). Lowers the barrier to a single easy first step.</div></div>
+
+    <div class="script"><div class="shead">7. The Slot-Saver (uses scarcity honestly)</div><div class="sbody">"Hi [Name], it's [Your Name] at Love Dental. We had a [day] [morning] hygiene slot open up — I thought of you since you're due. These tend to go fast. Want me to hold it for you? If that time doesn't work I've also got [day] at [time]."</div><div class="swhy"><strong>Why it works:</strong> Honest scarcity (a real opening) + you-came-to-mind personalization. The 'hold it for you' framing creates gentle, genuine urgency.</div></div>
+
+    <h2 class="part">Part 4 <span class="pn">— Rules for the Team</span></h2>
+    <ol class="steps">
+      <li><strong>Always personalize the brackets.</strong> A script with [tooth #] left blank is worse than no text. If you don't know the specific finding, pull the chart before you send.</li>
+      <li><strong>Never send more than one script style per cadence step.</strong> Rotate angles across touches so it never feels like a robot.</li>
+      <li><strong>Two specific time slots beats "when are you free?"</strong> every single time. Always close with options.</li>
+      <li><strong>Match the patient.</strong> Busy professional → short script. Anxious/long-lapsed → warm, no-pressure script.</li>
+      <li><strong>Log every contact and every outcome.</strong> We track which scripts actually book so we can double down on winners.</li>
+      <li><strong>The moment they book, stop the cadence and confirm warmly.</strong> The moment they opt out, honor it.</li>
+    </ol>
+
+    <h2 class="part">Part 5 <span class="pn">— How to Contact Patients</span></h2>
+    <ol class="steps">
+      <li><strong>Texts have a ceiling.</strong> They're great at "Hey, you're due, want to grab a time?" and terrible at re-selling someone who ghosted on $4K of diagnosed treatment. That patient needs a human who can handle "I've been meaning to…" and book them on the spot. The higher the value and the longer the lapse, the more a call earns its keep.</li>
+      <li><strong>Tier 1 — Run text-first on the easy tier</strong> (lapsed under 9 months, overdue recare, no big open treatment): Text first. If no reply in 3 days, call. If no answer, leave a voicemail <em>and</em> a follow-up text referencing the voicemail. The combination outperforms either alone because you're hitting the channel each patient actually uses.</li>
+      <li><strong>Tier 2 — Make calls for the high-value tier</strong> (unscheduled treatment on the books, 9+ months lapsed, patients who specifically said "I'll think about it"). These are worth a human's time because the production per conversion is high and a text won't close them. Call, then text as backup.</li>
+      <li>Personalize the text: name + specific reason + a specific date/time.</li>
+      <li>Keep it conversational, not a wall of text. One ask per message.</li>
+      <li>When offering dates, suggest the same date/time as the patient's last appointment.</li>
+      <li>Three touches across two channels. After that, stop chasing — diminishing returns, and you don't want to feel like spam. Place on a long-cycle list and re-touch in 60–90 days.</li>
+    </ol>
+
+    <div class="coach-note">
+      <div class="clabel">Kal's Coaching Note</div>
+      <p>Reactivation is the most expensive way to fill a schedule — every patient on this list is one Part 1 failed to hold. <strong>The real win is the two-appointment standard, not the rescue scripts.</strong> If your team nails "nobody leaves without their next two booked," the reactivation list shrinks until it's a handful of genuinely lapsed patients instead of a leaking bucket you bail out every month. Use the scripts, but track which step of Part 1 broke for every patient who landed here — that's where the actual money is.</p>
+    </div>
+
+    <div class="colophon">
+      Love Dental &nbsp;·&nbsp; Owner: Dr. Abedini &nbsp;·&nbsp; 12685 W Indian School Rd, Suite 102, Avondale, AZ &nbsp;·&nbsp; 623-270-7420<br>
+      Internal team document — Patient Retention &amp; Reactivation Protocol
+    </div>
+  </div>
+</div>
+</body>
+</html>
