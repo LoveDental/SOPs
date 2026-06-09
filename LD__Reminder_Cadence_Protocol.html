@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Dental - Reminder & Engagement Cadence</title>
+<style>
+  :root {
+    --ld-deep: #263086;
+    --ld-bright: #0e7ceb;
+    --ld-deep-dark: #1b2563;
+    --ld-light: #e9f1fd;
+    --say-green: #1f7a4d;
+    --say-green-bg: #eaf6f0;
+    --why-amber: #9a6700;
+    --why-amber-bg: #fdf6e3;
+    --warn-red: #a32020;
+    --warn-red-bg: #fbecec;
+    --ink: #1f2933;
+    --ink-soft: #52606d;
+    --line: #d6deec;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); line-height: 1.6; margin: 0; background: #f4f7fa; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 880px; margin: 0 auto; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .masthead { background: linear-gradient(135deg, var(--ld-deep) 0%, var(--ld-bright) 100%); color: #fff; padding: 40px 48px 34px; }
+  .masthead .brand { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.85; margin: 0 0 10px; }
+  .masthead h1 { margin: 0 0 8px; font-size: 30px; font-weight: 700; letter-spacing: -0.3px; }
+  .masthead .sub { margin: 0; font-size: 15px; opacity: 0.92; }
+  .masthead .tag { margin-top: 18px; font-size: 13px; opacity: 0.82; border-top: 1px solid rgba(255,255,255,0.25); padding-top: 14px; }
+  .body { padding: 12px 48px 56px; }
+  h2 { color: var(--ld-deep); font-size: 22px; margin: 42px 0 6px; padding-bottom: 8px; border-bottom: 2px solid var(--ld-light); }
+  h2 .num { display: inline-block; background: var(--ld-deep); color: #fff; font-size: 14px; width: 28px; height: 28px; line-height: 28px; text-align: center; border-radius: 6px; margin-right: 10px; vertical-align: middle; }
+  h3 { color: var(--ld-deep-dark); font-size: 17px; margin: 26px 0 4px; }
+  h4 { color: var(--ink); font-size: 15px; margin: 18px 0 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+  p { margin: 8px 0; }
+  .lead { font-size: 16px; color: var(--ink-soft); }
+  ul, ol { margin: 8px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  strong { color: var(--ink); }
+  .callout { background: var(--ld-light); border-left: 4px solid var(--ld-bright); padding: 14px 18px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+  .callout .label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ld-deep); margin: 0 0 4px; }
+  .rule-box { background: var(--warn-red-bg); border: 1px solid #f0c9c9; border-left: 4px solid var(--warn-red); padding: 16px 20px; margin: 20px 0; border-radius: 0 6px 6px 0; }
+  .rule-box .label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--warn-red); margin: 0 0 6px; }
+  .script { background: var(--say-green-bg); border: 1px solid #cfe8da; border-radius: 8px; padding: 14px 18px; margin: 10px 0 6px; color: #16432c; }
+  .script .say-label { font-weight: 700; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--say-green); display: block; margin-bottom: 6px; }
+  .script .msg { font-style: italic; }
+  .why { background: var(--why-amber-bg); border: 1px solid #f0e4c0; border-radius: 8px; padding: 11px 16px; margin: 0 0 18px; font-size: 14px; color: #5c4a12; }
+  .why .why-label { font-weight: 700; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--why-amber); margin-right: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th { background: var(--ld-deep); color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #f8fbfd; }
+  .tier { border: 1px solid var(--line); border-radius: 12px; margin: 20px 0; overflow: hidden; }
+  .tier .tier-head { background: linear-gradient(135deg, var(--ld-deep) 0%, var(--ld-bright) 100%); color: #fff; padding: 14px 20px; }
+  .tier .tier-head .t-name { font-size: 17px; font-weight: 700; margin: 0; }
+  .tier .tier-head .t-when { font-size: 13px; opacity: 0.9; margin: 2px 0 0; }
+  .tier .tier-body { padding: 8px 20px 18px; }
+  .chan { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 9px; border-radius: 20px; margin-right: 8px; vertical-align: middle; }
+  .chan.text { background: #e3f0ff; color: #0a5bbf; }
+  .chan.email { background: #efe8fb; color: #5a3db5; }
+  .chan.call { background: #fde9d6; color: #b85416; }
+  .touch { border-top: 1px solid var(--line); padding: 14px 0 4px; }
+  .touch:first-child { border-top: none; }
+  .touch .th { font-weight: 700; color: var(--ld-deep-dark); font-size: 15px; margin: 0 0 2px; }
+  .touch .tmeta { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 6px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin: 10px 0 0; font-size: 13px; }
+  .footer { padding: 24px 48px 40px; color: var(--ink-soft); font-size: 13px; border-top: 1px solid var(--line); }
+  .toc { background: #f8fbfd; border: 1px solid var(--line); border-radius: 10px; padding: 18px 24px; margin: 24px 0 8px; }
+  .toc h4 { margin-top: 0; color: var(--ld-deep); }
+  .toc a { color: var(--ld-deep-dark); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  @media print { body { background: #fff; } .wrap { box-shadow: none; max-width: 100%; } .tier, .script, .why, .callout, .rule-box, table { break-inside: avoid; } h2 { break-after: avoid; } }
+  @media (max-width: 600px) { .masthead, .body, .footer { padding-left: 22px; padding-right: 22px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <p class="brand">Love Dental</p>
+    <h1>Reminder &amp; Engagement Cadence</h1>
+    <p class="sub">The schedule of touches that gets patients in the chair, and the words for each one</p>
+    <p class="tag">Team Operating Standard &middot; Front Office &amp; Hygiene &middot; Owner: Dr. Abedini &middot; Built for Flex Dental automation &middot; Internal document</p>
+  </div>
+
+  <div class="body">
+
+    <p class="lead">This is the pre-appointment sequence: every text, email, and call we send from the moment an appointment is booked until the patient is in the chair. A missing reminder is the single most common reason patients don't show. But a reminder is a chance to reinforce a commitment, never to reopen the decision. Once they're here, the Cancellation Prevention Protocol takes over.</p>
+
+    <div class="callout">
+      <p class="label">The one idea that runs through all of it</p>
+      <p style="margin:0;">We do not "confirm." We <strong>remind, warmly and factually</strong>, and we speak as if showing up is simply what happens. The word "confirm" trains patients to think appointments here are loose and breakable. Our software still tracks status underneath (see Section 2), but the patient never hears that word.</p>
+    </div>
+
+    <div class="toc">
+      <h4>What's inside</h4>
+      <ol>
+        <li><a href="#why-tiers">Why the Cadence Scales by Lead Time</a></li>
+        <li><a href="#status">Confirm vs. Remind: the Language and the Software</a></li>
+        <li><a href="#tierA">Tier A &middot; Near-Term (1 to 3 days out)</a></li>
+        <li><a href="#tierB">Tier B &middot; Mid-Range (4 to 10 days out)</a></li>
+        <li><a href="#tierC">Tier C &middot; Far-Out (10+ days) &amp; New Patients</a></li>
+        <li><a href="#calls">When to Add a Live Call</a></li>
+        <li><a href="#emails">The Email Library</a></li>
+        <li><a href="#flex">Setting It Up in Flex</a></li>
+      </ol>
+    </div>
+
+    <!-- 1 -->
+    <h2 id="why-tiers"><span class="num">1</span>Why the Cadence Scales by Lead Time</h2>
+    <p>Most of our production is near-term, booked one to three days out. Those appointments don't need a long sequence; there's no time for one, and over-texting a patient who's coming tomorrow just annoys them. A smaller set of appointments sit a week or two out, and <strong>that gap is where no-shows breed</strong>, because life has time to get in the way.</p>
+    <p>So one fixed cadence is the wrong tool. We run <strong>three tiers gated by how far out the appointment is.</strong> Short bookings get a light sequence. Far-out bookings get the full treatment. Flex applies the right tier automatically based on lead time.</p>
+
+    <table>
+      <tr><th>Tier</th><th>Booked</th><th>Touches</th><th>Channels</th></tr>
+      <tr><td><strong>A</strong></td><td>1 to 3 days out</td><td>2</td><td>Text only</td></tr>
+      <tr><td><strong>B</strong></td><td>4 to 10 days out</td><td>3 to 4</td><td>Text + email</td></tr>
+      <tr><td><strong>C</strong></td><td>10+ days out / new patients</td><td>4 to 5</td><td>Text + email + optional call</td></tr>
+    </table>
+
+    <div class="rule-box">
+      <p class="label">Two rules that apply to every tier</p>
+      <p style="margin:0 0 6px;"><strong>1. Once a patient actively responds, the redundant follow-ups stop.</strong> Flex suppresses the rest of the sequence automatically so we never over-message someone who already engaged.</p>
+      <p style="margin:0;"><strong>2. Every touch is a reminder, never a "confirm."</strong> The wording below already reflects this. Don't reintroduce the word.</p>
+    </div>
+
+    <!-- 2 -->
+    <h2 id="status"><span class="num">2</span>Confirm vs. Remind: the Language and the Software</h2>
+    <p>These are two separate things, and we treat them separately:</p>
+    <ul>
+      <li><strong>What the patient reads</strong> (the message): no "confirm." Factual, warm, "we're looking forward to seeing you, reply Y so we know you got this."</li>
+      <li><strong>What the software records</strong> (status color): we absolutely still track this. It's the schedule's vital signs.</li>
+    </ul>
+
+    <div class="callout">
+      <p class="label">Important: a button tap is the weakest commitment there is</p>
+      <p style="margin:0;">If a patient taps "Y" but still no-shows, that green status was a false signal. People tap confirm on autopilot without reading. So we do not treat an auto-tap as our highest-confidence tier. <strong>The strongest green is a patient who got a live voice touch and said "yes, I'll be there," or who made a verbal commitment / pinky promise at booking.</strong> Status should track <em>commitment quality</em>, not just whether a button got pressed.</p>
+    </div>
+
+    <h4>Our internal status tiers (redefined)</h4>
+    <table>
+      <tr><th>Status</th><th>What earns it</th><th>Confidence</th></tr>
+      <tr><td><strong>Verbally Committed</strong></td><td>Spoke to patient live (call or in person); they committed. Or strong verbal commitment / pinky promise at booking.</td><td>Highest</td></tr>
+      <tr><td><strong>Text Confirmed</strong></td><td>Patient tapped Y / replied to a reminder. Real, but weak.</td><td>Medium</td></tr>
+      <tr><td><strong>Reminder Sent, No Reply</strong></td><td>Touches went out, no response yet.</td><td>Low, treat as at-risk</td></tr>
+    </table>
+    <p class="tip" style="font-size:13px;color:var(--ink-soft);">If Flex/Open Dental let you create or rename status categories, build these two distinct buckets ("Verbally Committed" vs "Text Confirmed") so the team manages to the real signal. A near-term appointment sitting at "Reminder Sent, No Reply" the day before is a call, not a shrug.</p>
+
+    <!-- 3 -->
+    <h2 id="tierA"><span class="num">3</span>Tier A &middot; Near-Term (booked 1 to 3 days out)</h2>
+    <p>Tight bookings. Two clean touches, both text. No email, no call, unless the patient is flagged high-risk (Section 6).</p>
+
+    <div class="tier">
+      <div class="tier-head"><p class="t-name">Tier A Sequence</p><p class="t-when">2 touches, text only</p></div>
+      <div class="tier-body">
+
+        <div class="touch">
+          <p class="th"><span class="chan text">Text</span>Day before</p>
+          <p class="tmeta">Sent afternoon/early evening the day prior.</p>
+          <div class="script"><span class="say-label">Text</span><span class="msg">"Hi [First], it's Love Dental! We're all set and looking forward to seeing you tomorrow at [time] with Dr. Abedini. We've got everything ready for you. Reply Y so we know you got this. See you then!"</span></div>
+        </div>
+
+        <div class="touch">
+          <p class="th"><span class="chan text">Text</span>Morning of</p>
+          <p class="tmeta">Sent 2 to 3 hours before the appointment.</p>
+          <div class="script"><span class="say-label">Text</span><span class="msg">"Good morning [First]! Just a friendly note that we're ready for you at [time] today. Looking forward to seeing you! If anything's changed, give us a quick call at [number]."</span></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="why"><span class="why-label">Why this works</span> Two warm, factual touches assume attendance and give no "confirm" language to push against. The morning-of text catches the day-of forgetters, the most common near-term no-show.</div>
+
+    <!-- 4 -->
+    <h2 id="tierB"><span class="num">4</span>Tier B &middot; Mid-Range (booked 4 to 10 days out)</h2>
+    <p>Enough lead time that life can intervene. Three to four touches, text and email mixed so we reach the patient on whatever channel they actually read.</p>
+
+    <div class="tier">
+      <div class="tier-head"><p class="t-name">Tier B Sequence</p><p class="t-when">3 to 4 touches, text + email</p></div>
+      <div class="tier-body">
+
+        <div class="touch">
+          <p class="th"><span class="chan email">Email</span>At booking</p>
+          <p class="tmeta">Auto-sends within minutes of scheduling. Doubles as the appointment record.</p>
+          <div class="script"><span class="say-label">Email, subject</span><span class="msg">"You're on the schedule, [First], here's your appointment with Love Dental"</span></div>
+          <div class="script"><span class="say-label">Email, body</span><span class="msg">Hi [First],<br><br>You're all set! Here are the details for your visit:<br><br><strong>Date:</strong> [day, date]<br><strong>Time:</strong> [time]<br><strong>With:</strong> Dr. Abedini<br><strong>Where:</strong> [address]<br><br>We've reserved this time especially for you and we'll have everything ready when you arrive. If you ever need to make a change, just give us a call at [number] and we'll take care of you.<br><br>Looking forward to seeing you!<br>The Love Dental Team</span></div>
+        </div>
+
+        <div class="touch">
+          <p class="th"><span class="chan text">Text</span>3 days prior</p>
+          <div class="script"><span class="say-label">Text</span><span class="msg">"Hi [First], Love Dental here! Looking forward to seeing you [day] at [time] with Dr. Abedini. We've got your spot reserved. Reply Y so we know you got this!"</span></div>
+        </div>
+
+        <div class="touch">
+          <p class="th"><span class="chan text">Text</span>Day before</p>
+          <div class="script"><span class="say-label">Text</span><span class="msg">"Hi [First]! We're all set and ready for you tomorrow at [time]. We're looking forward to it! If anything's changed, just give us a call at [number]. See you then!"</span></div>
+        </div>
+
+        <div class="touch">
+          <p class="th"><span class="chan text">Text</span>Morning of</p>
+          <p class="tmeta">2 to 3 hours before.</p>
+          <div class="script"><span class="say-label">Text</span><span class="msg">"Good morning [First]! Everything's ready for you at [time] today. See you soon!"</span></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="why"><span class="why-label">Why this works</span> The booking email creates an early written record (an implementation anchor they can add to their calendar). The 3-day text re-surfaces it while there's still time to plan around it. The day-before and morning-of close the gap. Once they reply Y, Flex drops the rest.</div>
+
+    <!-- 5 -->
+    <h2 id="tierC"><span class="num">5</span>Tier C &middot; Far-Out (10+ days) &amp; New Patients</h2>
+    <p>The longest gap and the highest no-show risk. Full sequence, plus a live call for the patients who warrant one (Section 6). New patients always run Tier C regardless of lead time, because new-patient no-shows are the most expensive kind.</p>
+
+    <div class="tier">
+      <div class="tier-head"><p class="t-name">Tier C Sequence</p><p class="t-when">4 to 5 touches, text + email + optional call</p></div>
+      <div class="tier-body">
+
+        <div class="touch">
+          <p class="th"><span class="chan email">Email</span>At booking</p>
+          <p class="tmeta">Same booking email as Tier B (see Section 4).</p>
+        </div>
+
+        <div class="touch">
+          <p class="th"><span class="chan email">Email</span>~1 week prior</p>
+          <div class="script"><span class="say-label">Email, subject</span><span class="msg">"Looking forward to seeing you next week, [First]"</span></div>
+          <div class="script"><span class="say-label">Email, body</span><span class="msg">Hi [First],<br><br>Just a friendly note that your visit with Dr. Abedini is coming up:<br><br><strong>[day, date] at [time]</strong><br><br>We're looking forward to taking great care of you. A few quick things that help your visit go smoothly:<br><br>&bull; Arrive a few minutes early so we can get you right back<br>&bull; Bring any questions about your smile, we love answering them<br>&bull; If you have updated insurance, just reply and let us know<br><br>We've got your time reserved especially for you. See you soon!<br>The Love Dental Team</span></div>
+        </div>
+
+        <div class="touch">
+          <p class="th"><span class="chan call">Call</span>3 to 5 days prior <em>(high-value / high-risk / new patients only)</em></p>
+          <p class="tmeta">Live call, or voicemail if no answer. See Section 6 for who qualifies.</p>
+          <div class="script"><span class="say-label">Live call</span><span class="msg">"Hi [First], this is [Name] at Love Dental. I'm calling about your visit [day] at [time] with Dr. Abedini, I wanted to let you know we have everything set and ready for you. We're really looking forward to seeing you. Is there anything we can do to make your visit more comfortable? ... Wonderful, we'll see you [day]!"</span></div>
+          <div class="script"><span class="say-label">Voicemail</span><span class="msg">"Hi [First], [Name] at Love Dental. Just wanted to let you know we're all set for your visit [day] at [time] with Dr. Abedini and looking forward to seeing you. If you need anything before then, give us a call at [number]. See you [day]!"</span></div>
+        </div>
+
+        <div class="touch">
+          <p class="th"><span class="chan text">Text</span>Day before</p>
+          <div class="script"><span class="say-label">Text</span><span class="msg">"Hi [First]! We're all set and ready for you tomorrow at [time] with Dr. Abedini. Looking forward to it! If anything's changed, just give us a call at [number]. See you then!"</span></div>
+        </div>
+
+        <div class="touch">
+          <p class="th"><span class="chan text">Text</span>Morning of</p>
+          <p class="tmeta">2 to 3 hours before.</p>
+          <div class="script"><span class="say-label">Text</span><span class="msg">"Good morning [First]! Everything's ready for you at [time] today. See you soon!"</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <h4>New patients: the Welcome Call (one human touch, not two)</h4>
+    <p><strong>Two days before</strong> a new patient's first visit (or <strong>at the time of booking</strong> if the appointment is sooner than that), the <strong>front desk</strong> calls personally to welcome them. Two days out is deliberate: it's far enough ahead that if the patient surfaces a problem on the call (a work conflict, childcare, cold feet), we still have room to solve it and save the slot, rather than catching it too late the day before. This is the single highest-ROI touch we have for new patients, and it's the <em>only</em> live welcome call they get. New patients still get the normal automated texts and booking email; the welcome call is their one human touch. We keep it warm and personal because that relationship-building is what gets a new patient in the door and turns them into a long-term patient.</p>
+    <div class="script"><span class="say-label">Welcome call</span><span class="msg">"Hi Ms. Jones, this is [Name] at Love Dental! We're so looking forward to meeting you on [day] at [time]. We'll have everything ready for you. Is there anything we can do ahead of time to make your first visit more comfortable? ... Wonderful, we'll see you [day] at [time]. We can't wait to meet you!"</span></div>
+    <p class="tmeta" style="margin-top:8px;"><strong>If no answer:</strong> leave a genuine voicemail in the moment (a real "I tried you live" message still carries warmth). Never a pre-recorded or ringless drop, which lands like a robocall and defeats the personal touch.</p>
+    <div class="why"><span class="why-label">Why this works</span> Authority transfer plus reciprocity. A patient the doctor personally welcomed feels seen and is far more likely to show.</div>
+
+    <!-- 6 -->
+    <h2 id="calls"><span class="num">6</span>When to Add a Live Call</h2>
+    <p>Calls do not scale across every patient, and they shouldn't. Automation (text + email) carries the load for everyone. We reserve live calls for the roughly <strong>15 to 20% of appointments</strong> where a human voice actually changes the outcome:</p>
+    <table>
+      <tr><th>Add a call when...</th><th>Why</th></tr>
+      <tr><td><strong>High-value appointment</strong> (large production: crowns, multi-unit, surgery, big restorative)</td><td>The dollar loss from a no-show justifies the labor every time.</td></tr>
+      <tr><td><strong>High-risk patient</strong> (previously no-showed or canceled late, repeat offender, on the VIP list)</td><td>History predicts behavior. These need the strongest commitment we can get.</td></tr>
+      <tr><td><strong>Far-out booking</strong> (the appointment has sat 10+ days)</td><td>The longer the gap, the weaker the original commitment has gotten.</td></tr>
+      <tr><td><strong>New patient</strong> (the front desk welcome call)</td><td>New-patient no-shows are the most expensive kind.</td></tr>
+    </table>
+    <div class="callout">
+      <p class="label">The goal of the call</p>
+      <p style="margin:0;">Get a real verbal commitment and mark them <strong>Verbally Committed</strong> (the strongest green). The call is not just a reminder, it's how we upgrade a weak text-tap into a commitment that actually predicts showing up.</p>
+    </div>
+
+    <!-- 7 -->
+    <h2 id="emails"><span class="num">7</span>The Email Library</h2>
+    <p>All email verbiage in one place for easy copy into Flex. Keep subject lines first-name and warm, never "REMINDER" in all caps, which reads as automated and gets ignored.</p>
+
+    <h4>Booking confirmation (Tier B &amp; C, at booking)</h4>
+    <div class="script"><span class="say-label">Subject</span><span class="msg">"You're on the schedule, [First], here's your appointment with Love Dental"</span></div>
+    <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 16px;">Body in Section 4.</p>
+
+    <h4>One week out (Tier C)</h4>
+    <div class="script"><span class="say-label">Subject</span><span class="msg">"Looking forward to seeing you next week, [First]"</span></div>
+    <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 16px;">Body in Section 5.</p>
+
+    <h4>Re-care / "you're due" email (for recall patients with no appointment booked)</h4>
+    <div class="script"><span class="say-label">Subject</span><span class="msg">"[First], it's about time for your next cleaning"</span></div>
+    <div class="script"><span class="say-label">Body</span><span class="msg">Hi [First],<br><br>It's been a few months since we've seen you, and you're due for your next cleaning and check-up. Keeping these on schedule is the easiest way to catch little things before they become big (and expensive) ones.<br><br>We'd love to get you back on the books. You can reply to this email, call us at [number], or book online here: [link]<br><br>We have openings this week and next, and we'll find a time that works for you.<br><br>Looking forward to seeing you again!<br>The Love Dental Team</span></div>
+    <div class="why"><span class="why-label">Note</span> This one uses gentle loss-aversion ("catch little things before they become big and expensive ones") because the patient has no appointment yet, the job is to motivate booking, not just remind.</div>
+
+    <!-- 8 -->
+    <h2 id="flex"><span class="num">8</span>Setting It Up in Flex</h2>
+    <ol>
+      <li><strong>Build three rule sets</strong> gated by lead time: 1 to 3 days (Tier A), 4 to 10 days (Tier B), 10+ days (Tier C). Flex assigns the tier based on how far out the appointment is booked.</li>
+      <li><strong>Set each touch</strong> to the channel and timing in Sections 3 to 5. Paste the matching verbiage.</li>
+      <li><strong>Turn on response suppression</strong> so that once a patient replies/taps, the remaining touches in their sequence stop firing. (This is the "if they hit a button, they stop getting them" behavior.)</li>
+      <li><strong>Keep status tracking on</strong>, but make sure the team knows a text-tap is "Text Confirmed," not "Verbally Committed." Only a live touch earns the top tier.</li>
+      <li><strong>Flag high-value / high-risk / new patients</strong> for the live call layer (Section 6). This is a human step, not automated, so build it into the daily front-desk routine: each morning, pull tomorrow's high-value and high-risk appointments and assign the calls.</li>
+      <li><strong>Never reintroduce the word "confirm"</strong> into any template, even if Flex's default templates use it. Replace them.</li>
+    </ol>
+
+    <div class="rule-box">
+      <p class="label">Don't go dark</p>
+      <p style="margin:0;">Whatever you turn on or off, keep at least the day-before and morning-of touches live for everyone. Missing reminders is the number-one cause of no-shows, cutting reminders to "fix" the confirm-language problem would raise no-shows, not lower them. We're changing the <em>words</em>, not removing the <em>touch</em>.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Prepared for Love Dental &middot; Owner: Dr. Abedini &middot; Internal team document &middot; Not for distribution outside the practice. Pairs with the Cancellation Prevention Protocol and the Cancellation Cheat Sheet.
+  </div>
+</div>
+</body>
+</html>
