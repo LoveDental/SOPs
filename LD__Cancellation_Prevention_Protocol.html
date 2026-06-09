@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Dental - Cancellation Prevention Protocol</title>
+<style>
+  :root {
+    --ld-deep: #263086;
+    --ld-bright: #0e7ceb;
+    --ld-deep-dark: #1b2563;
+    --ld-light: #e9f1fd;
+    --say-green: #1f7a4d;
+    --say-green-bg: #eaf6f0;
+    --why-amber: #9a6700;
+    --why-amber-bg: #fdf6e3;
+    --warn-red: #a32020;
+    --warn-red-bg: #fbecec;
+    --ink: #1f2933;
+    --ink-soft: #52606d;
+    --line: #d6deec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0;
+    background: #f4f7fa;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .masthead {
+    background: linear-gradient(135deg, var(--ld-deep) 0%, var(--ld-bright) 100%);
+    color: #fff;
+    padding: 40px 48px 34px;
+  }
+  .masthead .brand { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.85; margin: 0 0 10px; }
+  .masthead h1 { margin: 0 0 8px; font-size: 30px; font-weight: 700; letter-spacing: -0.3px; }
+  .masthead .sub { margin: 0; font-size: 15px; opacity: 0.92; font-weight: 400; }
+  .masthead .tag { margin-top: 18px; font-size: 13px; opacity: 0.82; border-top: 1px solid rgba(255,255,255,0.25); padding-top: 14px; }
+  .body { padding: 12px 48px 56px; }
+  h2 {
+    color: var(--ld-deep);
+    font-size: 22px;
+    margin: 42px 0 6px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ld-light);
+  }
+  h2 .num {
+    display: inline-block;
+    background: var(--ld-deep);
+    color: #fff;
+    font-size: 14px;
+    width: 28px; height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 6px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  h3 { color: var(--ld-deep-dark); font-size: 17px; margin: 26px 0 4px; }
+  h4 { color: var(--ink); font-size: 15px; margin: 18px 0 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+  p { margin: 8px 0; }
+  .lead { font-size: 16px; color: var(--ink-soft); }
+  ul, ol { margin: 8px 0 8px; padding-left: 22px; }
+  li { margin: 5px 0; }
+  strong { color: var(--ink); }
+  .callout {
+    background: var(--ld-light);
+    border-left: 4px solid var(--ld-bright);
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout .label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ld-deep); margin: 0 0 4px; }
+  .rule-box {
+    background: var(--warn-red-bg);
+    border: 1px solid #f0c9c9;
+    border-left: 4px solid var(--warn-red);
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .rule-box .label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--warn-red); margin: 0 0 6px; }
+  .script {
+    background: var(--say-green-bg);
+    border: 1px solid #cfe8da;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0 6px;
+    font-style: italic;
+    color: #16432c;
+  }
+  .script .say-label { font-style: normal; font-weight: 700; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--say-green); display: block; margin-bottom: 6px; }
+  .why {
+    background: var(--why-amber-bg);
+    border: 1px solid #f0e4c0;
+    border-radius: 8px;
+    padding: 11px 16px;
+    margin: 0 0 18px;
+    font-size: 14px;
+    color: #5c4a12;
+  }
+  .why .why-label { font-weight: 700; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--why-amber); margin-right: 6px; }
+  .fund-box {
+    background: var(--ld-light);
+    border: 1px solid #c9ddf7;
+    border-left: 4px solid var(--ld-bright);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 18px 0;
+  }
+  .fund-box .label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ld-deep); margin: 0 0 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th { background: var(--ld-deep); color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #f8fbfd; }
+  .obj {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  .obj .obj-head {
+    background: var(--ld-light);
+    padding: 12px 18px;
+    font-weight: 700;
+    color: var(--ld-deep-dark);
+    font-size: 16px;
+  }
+  .obj .obj-body { padding: 6px 18px 14px; }
+  .tip { font-size: 14px; color: var(--ink-soft); margin: 6px 0 0; }
+  .tip .tip-label { font-weight: 700; color: var(--ld-deep); }
+  .cadence {
+    background: linear-gradient(135deg, var(--ld-deep) 0%, var(--ld-bright) 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 20px 24px 22px;
+    margin: 18px 0;
+  }
+  .cadence .ctitle { font-size: 16px; font-weight: 700; letter-spacing: 0.5px; margin: 0 0 4px; }
+  .cadence .csub { font-size: 14px; opacity: 0.94; margin: 0 0 14px; }
+  .cadence ol { margin: 0; padding-left: 0; list-style: none; counter-reset: step; }
+  .cadence ol li { position: relative; padding: 7px 0 7px 40px; margin: 0; border-top: 1px solid rgba(255,255,255,0.18); font-size: 14.5px; }
+  .cadence ol li:first-child { border-top: none; }
+  .cadence ol li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 7px;
+    width: 24px; height: 24px; line-height: 24px; text-align: center;
+    background: #fff; color: var(--ld-deep); font-weight: 700; font-size: 13px; border-radius: 50%;
+  }
+  .cadence .cnote { font-size: 13px; opacity: 0.92; margin: 14px 0 0; border-top: 1px solid rgba(255,255,255,0.22); padding-top: 12px; }
+  .toc {
+    background: #f8fbfd;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 24px;
+    margin: 24px 0 8px;
+  }
+  .toc h4 { margin-top: 0; color: var(--ld-deep); }
+  .toc ol { columns: 2; column-gap: 32px; }
+  .toc a { color: var(--ld-deep-dark); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .footer { padding: 24px 48px 40px; color: var(--ink-soft); font-size: 13px; border-top: 1px solid var(--line); }
+  .summary {
+    border: 2px solid var(--ld-bright);
+    border-radius: 12px;
+    padding: 22px 26px 24px;
+    margin: 24px 0 8px;
+    background: #fbfdff;
+  }
+  .summary .s-kicker { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ld-bright); margin: 0 0 2px; }
+  .summary h3 { color: var(--ld-deep); margin: 0 0 12px; font-size: 20px; }
+  .summary ol { margin: 0; padding-left: 22px; }
+  .summary ol li { margin: 8px 0; font-size: 15px; }
+  .summary ol li b { color: var(--ld-deep-dark); }
+  .recap {
+    background: var(--ld-deep);
+    color: #fff;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 18px 0 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .recap .r-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ld-bright); white-space: nowrap; padding-top: 2px; }
+  .recap .r-text { font-size: 14.5px; line-height: 1.5; }
+  .recap .r-text b { color: #fff; font-weight: 700; }
+  @media print {
+    body { background: #fff; }
+    .wrap { box-shadow: none; max-width: 100%; }
+    .obj, .script, .why, .callout, .rule-box, .fund-box, .cadence, .summary, .recap, table { break-inside: avoid; }
+    h2 { break-after: avoid; }
+  }
+  @media (max-width: 600px) {
+    .masthead, .body, .footer { padding-left: 22px; padding-right: 22px; }
+    .toc ol { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <p class="brand">Love Dental</p>
+    <h1>Cancellation Prevention Protocol</h1>
+    <p class="sub">The psychology and scripts that keep the schedule full</p>
+    <p class="tag">Team Operating Standard &middot; Front Office, Hygiene &amp; Clinical &middot; Owner: Dr. Abedini &middot; Internal team document</p>
+  </div>
+
+  <div class="body">
+
+    <p class="lead">An empty chair is lost production that never comes back. You can't sell yesterday's 2:00 slot. This protocol is how we protect the schedule, and it's built on one idea: <strong>patients don't arrive trained. We teach them, in every interaction, how to treat our time.</strong> Most of them have spent years being treated like a policy number by healthcare. When we treat them like a person and quietly hold a high standard, the vast majority rise to it.</p>
+
+    <div class="callout">
+      <p class="label">The core belief</p>
+      <p style="margin:0;">We get what we expect, because our expectations shape our behavior, and our behavior creates the result. A team that expects patients to show up, and communicates that warmly and consistently, has fewer cancellations than a team that braces for them.</p>
+    </div>
+
+    <div class="toc">
+      <h4>What's inside</h4>
+      <ol>
+        <li><a href="#psych">The Psychology Toolkit</a></li>
+        <li><a href="#language">The Language Rules</a></li>
+        <li><a href="#booking">Locking It In at Booking</a></li>
+        <li><a href="#fund">The Make Your Day Fund</a></li>
+        <li><a href="#reminders">The Reminder System</a></li>
+        <li><a href="#text">When a Patient Texts to Cancel</a></li>
+        <li><a href="#save">The Save Conversation</a></li>
+        <li><a href="#fee">Our Cancellation Fee Policy</a></li>
+        <li><a href="#objections">The Top 10 Objections</a></li>
+        <li><a href="#offenders">Repeat Offenders &amp; VIPs</a></li>
+        <li><a href="#fill">Filling a Hole Fast</a></li>
+        <li><a href="#noshow">When They Don't Show</a></li>
+        <li><a href="#rules">Rules for the Team</a></li>
+      </ol>
+    </div>
+
+    <div class="summary">
+      <p class="s-kicker">Start Here</p>
+      <h3>The Whole Thing in 60 Seconds</h3>
+      <p style="margin:0 0 10px;color:var(--ink-soft);">If you read nothing else today, read this.</p>
+      <ol>
+        <li><b>An empty chair never comes back.</b> Protecting the schedule is everyone's job, and it's mostly won before the patient ever tries to cancel.</li>
+        <li><b>Patients aren't trained, we train them.</b> Warmly, in every interaction, we communicate that showing up is simply what happens here.</li>
+        <li><b>Never say confirm, cancel, or remind.</b> We "remind" warmly and factually and talk about "changes to the schedule." We never give the patient an opening to bail.</li>
+        <li><b>Lock in commitment at booking.</b> "Will you be here?" and, past 48 hours, the pinky promise. A spoken "yes" is what makes people show.</li>
+        <li><b>If a patient texts to cancel, we CALL.</b> The text is the signal, the call is the save. Send the heads-up text, then call within 5 minutes. Never negotiate by text.</li>
+        <li><b>Never say "okay, no problem" to a cancellation.</b> Acknowledge, empathize, then pivot to a same-week save. Always rebook on the same call.</li>
+        <li><b>You have the Make Your Day Fund.</b> Up to $75, your call, to solve a problem on the spot. Frame it as a personal gift, never as policy.</li>
+        <li><b>Lead with concern, always.</b> Whether it's a cancellation, a no-show, or a repeat offender, we care about the person first. That warmth is what keeps them coming back.</li>
+      </ol>
+    </div>
+
+    <!-- ============ 1. PSYCHOLOGY ============ -->
+    <h2 id="psych"><span class="num">1</span>The Psychology Toolkit</h2>
+    <p>Every script in this document is an application of one of these principles. Learn the principles and you can handle a situation no script anticipated. These aren't tricks. They're how human decisions actually get made, and they're backed by behavioral research on appointment attendance.</p>
+
+    <h3>Commitment &amp; Consistency</h3>
+    <p>People are wired to act in line with what they've already said and done. Once a patient states a commitment out loud, breaking it creates internal friction, and most people resolve that friction by keeping the commitment. The more <em>active</em> and <em>specific</em> the commitment, the stronger the pull. This is why we make patients say their plan out loud rather than just nodding at ours.</p>
+    <div class="why"><span class="why-label">In practice</span> "Will you be here?" and the pinky promise <em>(a warm, playful spoken agreement where the patient promises to give us 48 hours' notice if they ever need to change, taught in full in Section 3)</em> both force a verbal yes. A patient who said "yes, I'll be there" is measurably less likely to cancel than one who was simply told the time.</div>
+
+    <h3>Implementation Intentions (the "when-where-how" plan)</h3>
+    <p>Research is clear: people follow through far more often when they've formed a concrete plan for <em>how</em> they'll get there, not just an intention to go. When a patient pictures the logistics, what they'll do beforehand, how they'll get there, what time they'll leave, the appointment moves from a vague obligation to a scheduled event in their real life.</p>
+    <div class="why"><span class="why-label">In practice</span> "Great, so you'll head over right after you drop the kids at school?" gets them rehearsing the actual morning. That mental rehearsal is what makes them show.</div>
+
+    <h3>Loss Aversion</h3>
+    <p>Losing something hurts about twice as much as gaining the equivalent feels good. Patients work harder to avoid a loss (a bigger problem, a more expensive fix, expiring benefits, a reserved slot given away) than to chase a gain. We frame the stakes as something they'd lose by not coming.</p>
+    <div class="why"><span class="why-label">In practice</span> "Right now it's a simple filling. If it waits, that same tooth usually needs a crown" lands harder than "you should get this filling."</div>
+
+    <h3>Authority Transfer</h3>
+    <p>A request carries more weight when it comes from the doctor than from the front desk. Attaching the message to Dr. Abedini's personal concern elevates it from an administrative reminder to a clinical priority.</p>
+    <div class="why"><span class="why-label">In practice</span> "Dr. Abedini asked me to reach out because he's been thinking about that tooth" outperforms "you're due for a filling."</div>
+
+    <h3>The Assumptive Close</h3>
+    <p>Never ask a yes/no question when you can offer a choice between two yeses. "Do you want to come in?" invites "no." "Monday at 10 or Wednesday at 2?" moves the decision from <em>whether</em> to <em>when</em>.</p>
+
+    <h3>Reciprocity</h3>
+    <p>When we do something genuinely generous for a patient, cover a ride, waive a fee, fit them in, they feel a natural pull to reciprocate by showing up and staying loyal. Generosity given freely and warmly creates goodwill that pays back many times over. This is the engine behind our Make Your Day Fund (Section 4).</p>
+
+    <h3>Social Norms</h3>
+    <p>People take cues from what they believe others like them do. We never signal that cancellations are normal here. The whole practice quietly communicates: <em>our patients keep their appointments.</em> That expectation becomes self-fulfilling.</p>
+
+    <div class="recap"><span class="r-label">Remember<br>this</span><span class="r-text">Every script in this doc is just one of these principles in action. The big four to internalize: <b>get an active spoken commitment</b>, <b>frame stakes as a loss they'd avoid</b>, <b>let generosity create goodwill</b>, and <b>let the doctor's name carry weight.</b></span></div>
+
+    <!-- ============ 2. LANGUAGE ============ -->
+    <h2 id="language"><span class="num">2</span>The Language Rules</h2>
+    <p>The words we use train patients' expectations. Small wording choices move the cancellation rate.</p>
+
+    <div class="rule-box">
+      <p class="label">Never use these three words, spoken or written</p>
+      <p style="margin:0;"><strong>Confirm. Cancel. Remind.</strong> Each one quietly tells the patient that appointments here are loose and breakable. "Confirm" implies it wasn't firm. "Remind" implies they'd otherwise forget. "Cancel" puts the idea in their head. We talk about <strong>"changes to the schedule"</strong> instead, and we speak as if showing up is simply what happens.</p>
+    </div>
+
+    <h4>Use first names, always</h4>
+    <p>Using the patient's first name in reminders is one of the highest-return, zero-cost moves we have. Studies show a large drop in cancellations when the name is used versus a generic message. Most of this is automated; check that it's actually firing.</p>
+
+    <h4>The "everything's ready" reminder</h4>
+    <p>A reminder should state, as fact, that we're prepared and expecting them, not ask them to confirm.</p>
+    <div class="script"><span class="say-label">Instead of "calling to confirm..."</span>"Mrs. Jones, I'm calling about your 8 AM appointment tomorrow with Dr. Abedini. I wanted to let you know we have everything set and ready for you, and we look forward to seeing you shortly before 8 AM tomorrow."</div>
+    <div class="why"><span class="why-label">Why it works</span> It assumes attendance, transfers a little authority (we prepared <em>for you</em>), and gives no opening to bail. It's a statement, not a question.</div>
+
+    <h4>Text reminders: make them factual, not an exit</h4>
+    <div class="script"><span class="say-label">Say</span>"We're looking forward to seeing you for your dental appointment Thursday at 8 AM. Reply 'Y' to let us know you got this message."</div>
+    <p class="tip"><span class="tip-label">Note:</span> "Reply Y that you received this" is not the same as "reply to confirm." One asks for a read receipt; the other invites a renegotiation. If a patient texts back to cancel, we <strong>call them</strong>, see Section 6.</p>
+
+    <h4>Appointment cards</h4>
+    <p>Strip all penalty/cancellation language off the card. Replace it with reserved-for-you framing:</p>
+    <div class="script"><span class="say-label">Card text</span>"Please mark this important appointment on your calendar today. We look forward to seeing you at this time, reserved especially for you."</div>
+
+    <!-- ============ 3. BOOKING ============ -->
+    <h2 id="booking"><span class="num">3</span>Locking It In at Booking</h2>
+    <p>The cancellation battle is mostly won or lost the moment the appointment is made. A strong commitment at booking prevents the save conversation from ever being needed.</p>
+
+    <h3>The "Will You Be Here?" Close</h3>
+    <p>End every booking by having the patient verbally commit. Don't skip it because it feels small. That verbal yes is the commitment principle doing its work.</p>
+    <div class="script"><span class="say-label">Say</span>"Okay, Ms. Jones, you'll have your exam with the doctor, who'll give you an update on your oral health. Once we know what type of cleaning you need, the team will map out your next step. Sound good?<br><br>Your visit is Thursday, January 28th at 8 AM. <strong>Will you be here?</strong>"</div>
+    <div class="why"><span class="why-label">Why it works</span> Commitment &amp; consistency. "Will you be here?" requires an active "yes, I will," far stickier than "see you Thursday."</div>
+
+    <h3>The Pinky Promise</h3>
+    <p>For any appointment booked more than 48 hours out, add the pinky promise. <strong>The pinky promise is a warm, slightly playful spoken agreement: you ask the patient to promise to give us 48 hours' notice if they ever need to change the appointment, then seal it with an actual "pinky promise?"</strong> The playfulness is the point. It makes the commitment memorable and warm instead of stern, while still locking it in.</p>
+    <div class="script"><span class="say-label">Say</span>"Your appointment with Dr. Abedini is Thursday at 10 AM to fix that old filling before it breaks into something bigger. If something comes up and you need to make a change, <strong>will you promise to give us 48 hours' notice</strong> so we can offer the time to another patient?"<br><br>(patient: "Yes, I will.")<br><br>"Okay, <strong>pinky promise?</strong>" <em>(smile, playful tone)</em></div>
+    <div class="why"><span class="why-label">Why it works</span> A second, more vivid commitment. The pinky promise feels like a personal bond, not a policy, so breaking it feels personal too.</div>
+
+    <h3>Add an implementation intention</h3>
+    <p>After the commitment, get them to picture the logistics. One light question does it.</p>
+    <div class="script"><span class="say-label">Say</span>"Perfect. Since it's an 8 AM, will you come straight from home, or stop somewhere first? ... Great, so you'll head over right after your coffee. We'll have everything ready."</div>
+
+    <h3>Keep new patients inside 48 hours</h3>
+    <ul>
+      <li>Don't schedule a new patient further out than 48 hours when you can avoid it. The gap between booking and visit is where no-shows breed.</li>
+      <li>Build dedicated new-patient blocks into the schedule in advance so there's always near-term room.</li>
+      <li>If a new patient <em>must</em> go beyond 48 hours, the pinky promise becomes mandatory.</li>
+    </ul>
+
+    <h3>The Doctor Welcome Call (new patients)</h3>
+    <p>The day before, the coordinator hands Dr. Abedini the next day's new-patient list. He calls or leaves a voicemail (text, voice memo, or video works too) welcoming each one.</p>
+    <div class="script"><span class="say-label">Say</span>"Ms. Jones, this is Dr. Abedini at Love Dental. I'm looking forward to meeting you tomorrow at 10 AM, we'll have everything ready for you. If there's anything that would help me and the team make your visit more comfortable, give us a call. Otherwise, see you tomorrow at 10. See you then!"</div>
+    <div class="why"><span class="why-label">Why it works</span> Authority transfer plus reciprocity. A patient the doctor personally welcomed feels seen, and far more obligated to show.</div>
+
+    <h3>Separate payment from showing up</h3>
+    <p>When a treatment plan is presented, always offer to take payment that same day. A patient who has already paid has made a financial commitment and is dramatically more likely to attend.</p>
+
+    <div class="recap"><span class="r-label">Remember<br>this</span><span class="r-text">Never let a patient leave the booking without a spoken <b>"yes, I'll be here."</b> Past 48 hours out, add the <b>pinky promise.</b> New patients get the <b>doctor welcome call</b> the day before. The strongest commitment is made before they ever walk out.</span></div>
+
+    <!-- ============ 4. FUND ============ -->
+    <h2 id="fund"><span class="num">4</span>The Make Your Day Fund</h2>
+    <p>Every team member has standing authority to spend <strong>up to $75</strong> to solve a patient's problem on the spot, without asking Dr. Abedini first. We call it the <strong>Make Your Day Fund</strong>. It exists so you can make an executive decision in the moment to save an appointment and make a patient feel taken care of.</p>
+
+    <div class="fund-box">
+      <p class="label">How to use it</p>
+      <ul style="margin:0;">
+        <li><strong>You're trusted, not tested.</strong> If you genuinely think it fits the situation, use it. The cap is $75 per situation.</li>
+        <li><strong>Frame it as personal, never as policy.</strong> "Each of us has a little leeway to take care of our patients, and I'd love to use mine to help you out" lands as a gift. "The practice will reimburse you" lands as a transaction. The gift is what triggers reciprocity.</li>
+        <li><strong>Don't say a dollar amount to the patient.</strong> Say "leeway to take care of you," not "I have $75." Naming a number invites math and cheapens the gesture.</li>
+        <li><strong>Most common use:</strong> covering a ride for a patient with car trouble (see the Top 10, objection 2, and the reimbursement note below).</li>
+      </ul>
+    </div>
+    <div class="why"><span class="why-label">Why it works</span> Reciprocity. A patient you personally went out of your way for feels a pull to show up, stay loyal, and tell their friends. A $20 to $30 ride that saves a $200 to $800 appointment is enormous ROI, and the story travels.</div>
+
+    <!-- ============ 5. REMINDERS ============ -->
+    <h2 id="reminders"><span class="num">5</span>The Reminder System</h2>
+    <p>A missing reminder is the single most common reason patients don't show. Without it, they can't arrange childcare, time off, or a ride. But a reminder is a chance to reinforce commitment, not to reopen the decision.</p>
+    <ul>
+      <li><strong>Multi-touch, multi-channel.</strong> Text plus a live voice touch beats either alone, because you reach each patient on the channel they actually use.</li>
+      <li><strong>Always first-name.</strong> See Section 2.</li>
+      <li><strong>Factual, never "confirm."</strong> State that we're ready and expecting them.</li>
+      <li><strong>Thank reliable patients.</strong> A quick, genuine "thank you for always being so good about your visits" rewards the behavior and makes them want to keep earning it.</li>
+    </ul>
+
+    <!-- ============ 6. TEXT TO CANCEL ============ -->
+    <h2 id="text"><span class="num">6</span>When a Patient Texts to Cancel</h2>
+    <p>More and more patients text to cancel. A text gives them total control and zero friction, they can ignore a reply, give a one-word answer, or go quiet. Every save tool we have (warmth, concern, the doctor check, the Make Your Day Fund) only works with a voice on the line. So our rule is simple:</p>
+
+    <div class="cadence">
+      <p class="ctitle">&#128241; The text is the signal. The call is the save.</p>
+      <p class="csub">As soon as a patient texts to cancel, we call. We never negotiate the cancellation by text.</p>
+      <ol>
+        <li><strong>Text comes in.</strong> Don't reply to negotiate.</li>
+        <li><strong>Send the heads-up text</strong> right away so the call is expected, not a cold interruption they screen.</li>
+        <li><strong>Call within 5 minutes</strong>, while they're still holding their phone and still in the moment.</li>
+        <li><strong>No answer?</strong> Leave a brief warm voicemail and send a bridge text inviting a callback.</li>
+        <li><strong>Wait a bit, then try once more.</strong> If they stay quiet, send the graceful close and leave the door open.</li>
+      </ol>
+      <p class="cnote"><strong>The exception:</strong> if a patient clearly says "stop contacting me," or it's a genuine family emergency, honor it and note the file. We pursue the ordinary "I need to cancel," never someone setting a real boundary.</p>
+    </div>
+
+    <p class="tip"><span class="tip-label">Timing note:</span> this is the opposite of a no-show. For a cancel text, call <strong>within 5 minutes while they're warm</strong>. For a no-show, you <em>wait</em> 5 minutes past the appointment time, then call (Section 12). Don't confuse the two.</p>
+
+    <h3>Bridge texts (get them on the phone)</h3>
+    <p>These do not try to save the appointment by text. Their only job is to get the patient on a call.</p>
+    <div class="script"><span class="say-label">1 &middot; The heads-up (send before you dial)</span>"Hi [First], it's [Name] at Love Dental. So sorry to hear you need to make a change! Going to give you a quick call in the next couple minutes so we can take care of you."</div>
+    <div class="script"><span class="say-label">2 &middot; Missed you, warm (you called, no answer)</span>"Hi [First], [Name] at Love Dental. Just tried you, no worries I missed you! I wanted to check in and see what's going on so we can find a time that works better for you. When's a good moment to catch you?"</div>
+    <div class="script"><span class="say-label">3 &middot; The genuine check-in (second attempt)</span>"Hi [First], just thinking of you. Everything okay? Give me a quick call when you have a sec, I'd love to get you taken care of and not have you waiting weeks."</div>
+    <div class="script"><span class="say-label">4 &middot; The graceful close (gone quiet, leave the door open)</span>"No problem at all, [First]! I know life gets busy. Whenever you're ready, we're here and we'd love to see you. Just text or call and we'll get you right back on the schedule."</div>
+
+    <div class="recap"><span class="r-label">Remember<br>this</span><span class="r-text">Texted cancellation = <b>pick up the phone.</b> Send the heads-up text first so the call is expected, then call within 5 minutes. The bridge texts only exist to get them on the line, <b>we never talk them out of canceling by text.</b></span></div>
+
+    <!-- ============ 7. SAVE ============ -->
+    <h2 id="save"><span class="num">7</span>The Save Conversation</h2>
+    <div class="rule-box">
+      <p class="label">The #1 rule</p>
+      <p style="margin:0;">The instant a patient says they want to cancel, <strong>never</strong> reply "okay, no problem, let's reschedule." That sentence costs us money every single time. Always try to save same-day or same-week <em>first</em>.</p>
+    </div>
+
+    <h3>The 4-Step Framework, use it on every save call</h3>
+    <table>
+      <tr><th>Step</th><th>What you do</th><th>Why</th></tr>
+      <tr><td><strong>1. Acknowledge</strong></td><td>Validate them. Never argue with their reason.</td><td>An argued-with patient digs in. A heard patient stays open.</td></tr>
+      <tr><td><strong>2. Empathize</strong></td><td>One sentence. Don't over-apologize.</td><td>Warmth without grovelling keeps your authority intact.</td></tr>
+      <tr><td><strong>3. Pivot to solving</strong></td><td>Offer a same-week alternative, not next month.</td><td>The further out you push, the lower the show rate.</td></tr>
+      <tr><td><strong>4. Anchor value/policy</strong></td><td>Only if they push back. Reframe the stakes, or mention policy gently.</td><td>Held in reserve so it never feels like a threat.</td></tr>
+    </table>
+
+    <h3>"Show Concern &amp; Create Resistance"</h3>
+    <p>When a patient calls to cancel, our reflex is concern for <em>them</em>, plus gentle resistance to the cancellation, never an easy "sure, no problem." Note: <strong>we don't actually charge cancellation fees.</strong> The fee is referenced as a value signal and then warmly waived, which builds goodwill.</p>
+    <div class="script"><span class="say-label">How it sounds</span>Patient: "Hi, I need to cancel my appointment tomorrow."<br><br>"Oh no! Is everything okay?"<br><br>Patient: "Yeah, another appointment came up I couldn't move."<br><br>"Shoot, we had two hours set aside for you with Dr. Abedini. Let me put you on a quick hold and let him know you won't be able to make it." <em>(hold 15 to 25 seconds)</em><br><br>"Okay, Ms. Jones, normally we have a $150 fee for changes inside 48 hours. Are you sure there's no way you can make it work?"<br><br>Patient: "No, I really can't."<br><br>"Okay, we'll go ahead and waive that fee this time as a courtesy, we really value you as a patient. Let's get you rescheduled. I have Tuesday at 3 or Thursday at 10, which works better?"</div>
+    <div class="why"><span class="why-label">Why it works</span> Concern (we care about you) + a real cost signal (your slot has value) + reciprocity (we waived it for you) + an immediate assumptive close. Always reschedule on the same call, never "we'll call you back."</div>
+
+    <h4>On the hold</h4>
+    <p>Place the "let me put you on hold to tell Dr. Abedini" move <strong>after</strong> you've made a genuine save attempt, not before. Used early it reads as a guilt trip; used after you've tried to solve their problem, it lands as "we really set aside time for you." Keep the hold to <strong>15 to 25 seconds</strong>: long enough to be believable, short enough that an already-hesitant patient doesn't get annoyed. Always say "bear with me one second, Mrs. Jones" before muting, never leave them in silence.</p>
+
+    <h3>Two lines worth memorizing</h3>
+    <div class="script"><span class="say-label">The Save Line</span>"Before we reschedule out, can I ask, is there any way we can make today work? I'd really hate for you to wait three weeks when we have you on the schedule right now."</div>
+    <div class="script"><span class="say-label">The Policy Reminder (use sparingly)</span>"Just a friendly reminder, per our attendance policy, since we're inside our 48-hour window there's a cancellation fee. I do have some leeway if you can make it in the next day or two, I'd love to find a way to keep your appointment and avoid any fees."</div>
+
+    <div class="recap"><span class="r-label">Remember<br>this</span><span class="r-text">Acknowledge, empathize, <b>pivot to a same-week save.</b> Concern first, resistance second, "okay no problem" never. The hold comes <b>after</b> a real save attempt, 15 to 25 seconds. <b>Always rebook on the same call.</b></span></div>
+
+    <!-- ============ 8. FEE POLICY ============ -->
+    <h2 id="fee"><span class="num">8</span>Our Cancellation Fee Policy</h2>
+    <p>Here is the honest truth about cancellation fees, because the team needs to understand the <em>why</em>, not just the rule: <strong>the fee is not how we make money back. The fee is a signal that your time slot has real value.</strong> The research on the best-run practices is clear, fees don't meaningfully reduce no-shows on their own. Our reminder cadence, our commitment-at-booking, and our save calls do the real work. The fee is theater with a purpose: it lets us say "this mattered," then be generous by waiving it.</p>
+
+    <div class="callout">
+      <p class="label">Why we don't lean on a big fee</p>
+      <p style="margin:0;">A high or punitive fee doesn't deter better than a modest one, it just burns the relationship and pushes good patients away. Worse, an <strong>inconsistent</strong> fee (charged sometimes, waived randomly) is the worst of both worlds: it annoys our reliable patients and doesn't reliably deter the unreliable ones. Consistency matters far more than the dollar amount. This keeps our front door open, which is our philosophy.</p>
+    </div>
+
+    <h3>The tiered rule (apply it the same way, every time)</h3>
+    <table>
+      <tr><th>Situation</th><th>What we do</th><th>Why</th></tr>
+      <tr><td><strong>First late cancellation or no-show</strong></td><td><strong>Always waived</strong>, framed as a courtesy: "We'll take care of that this time, we really value you."</td><td>Goodwill costs us nothing here (we weren't collecting anyway) and earns loyalty. Reciprocity.</td></tr>
+      <tr><td><strong>Repeat offender</strong> (the ~20% who cause ~80% of the pain)</td><td>The fee gets <strong>real</strong> ($50 to $75), <em>or</em> we move them to the VIP / same-day-only list so they can't hold a slot they'll waste.</td><td>This is the only tier where an actual charge earns its keep. History predicts behavior.</td></tr>
+      <tr><td><strong>Genuine emergency / first-time good patient</strong></td><td>Warm save, no fee, ever. Concern first.</td><td>Punishing the 80% who show up fine costs more good patients than it saves bad appointments.</td></tr>
+    </table>
+
+    <h3>The stated fee vs. the charged fee</h3>
+    <p>On a save call we may <em>reference</em> a $150 fee as a value signal and then warmly waive it (see the "Show Concern &amp; Create Resistance" script in Section 7). That stated number exists to communicate that the slot was valuable. The fee we'd <em>actually charge</em> a repeat offender is the modest $50 to $75, in line with what well-run offices do. Don't confuse the two: the big number is theater, the small number is what we'd really collect, and only from the repeat tier.</p>
+
+    <h3>Card on file (repeat tier only)</h3>
+    <p>The only way offices that actually collect a fee succeed in collecting it is with a <strong>card on file, taken with the patient's written consent.</strong> We use this only for the repeat-offender tier, never as a barrier for new or reliable patients. A card-on-file requirement at the front door would work against our open-door philosophy, so it's a targeted tool, not a blanket one.</p>
+
+    <div class="rule-box">
+      <p class="label">Decision flow when a patient cancels late / no-shows</p>
+      <p style="margin:0;">1. Is it a genuine emergency? &rarr; No fee, warm follow-up. Done.<br>
+      2. Is this their first time? &rarr; Waive it as a courtesy. Done.<br>
+      3. Are they a repeat offender? &rarr; The fee is real this time ($50 to $75), or move them to same-day-only. Get a card on file going forward.<br>
+      4. Unsure? &rarr; Default to the warm waive and flag the account so we can see if a pattern is forming.</p>
+    </div>
+
+    <div class="recap"><span class="r-label">Remember<br>this</span><span class="r-text">The fee is a <b>value signal, not a revenue plan.</b> First time is always waived. Repeat offenders are the only ones who actually pay (or move to same-day-only). <b>Consistency beats the dollar amount</b>, and we never punish a good patient for one bad day.</span></div>
+
+    <!-- ============ 9. OBJECTIONS ============ -->
+    <h2 id="objections"><span class="num">9</span>The Top 10 Objections</h2>
+    <p>Each of these is the framework applied to a specific reason, spoken on the save call. The goal is almost always the same: <strong>save same-week, book on the call, never push to next month.</strong></p>
+
+    <div class="obj"><div class="obj-head">1 &middot; "I'm sick"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"I'm so sorry you're not well. Is it contagious or more like allergies? I have an opening [day this week or day next week] which gives you a few days to bounce back and you're also not having to wait weeks to get back in."</div>
+      <p class="tip"><span class="tip-label">Goal:</span> rebook within 7 days, not next month.</p>
+    </div></div>
+
+    <div class="obj"><div class="obj-head">2 &middot; "Car trouble / flat tire"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"That's the worst! Tell you what, I'm going to do something especially for you. Each of us on the team has a little leeway to take care of our patients and make someone's day, and I'd love to use mine to help you out. If you grab an Uber or Lyft, we'll put it toward today's visit, so you're saving the ride and the cancellation fee. What do you think, want me to text you the address?"</div>
+      <p class="tip"><span class="tip-label">This is the Make Your Day Fund in action (Section 4).</span> Credit covers the ride (see reimbursement note below). They bring the receipt at checkout. Frame it warmly and personally, never as policy.</p>
+    </div></div>
+
+    <div class="obj"><div class="obj-head">3 &middot; "Childcare fell through"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"Don't you hate when that happens! Good news is, we love kids here. We have Disney, Netflix and toys for the kiddos. Instead of paying a sitter another day, bring them with you. Let's save you that babysitter money."</div>
+      <p class="tip"><span class="tip-label">Frame:</span> "save the babysitter money" flips it from inconvenience to a win. Most parents have never been told they can bring the kids.</p>
+    </div></div>
+
+    <div class="obj"><div class="obj-head">4 &middot; "Work / boss needs me"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"Work doesn't always cooperate. Is this a one-time thing, or is your schedule usually inflexible with work? We've got 8 AM and some late-afternoon slots, let's book [day this week/next] before both our schedules fill up."</div>
+      <p class="tip"><span class="tip-label">Tip:</span> Book NOW on the call. Never "I'll call you back."</p>
+    </div></div>
+
+    <div class="obj"><div class="obj-head">5 &middot; "I can't afford it right now"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"I appreciate you being honest, let's figure it out together. Let's get this on monthly payments, we can get you approved in ~60 seconds and most patients qualify for 0% interest. Your insurance is awesome and covers $[X], so we just need to make $[Y] work. Want me to send the Cherry link right now?"</div>
+      <p class="tip"><span class="tip-label">The magic move:</span> send the link on the call. Lead with financing, it solves the real problem at no cost to our margin.</p>
+    </div></div>
+
+    <div class="obj"><div class="obj-head">6 &middot; "I forgot / wasn't expecting it today"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"No worries! Good news, you're still on the schedule. If you can be here in 30 to 45 minutes we can still see you. If not, I can get you in [later today/tomorrow/this week] or [later today/tomorrow/this week]?"</div>
+      <p class="tip"><span class="tip-label">Tip:</span> Always offer same-day first.</p>
+    </div></div>
+
+    <div class="obj"><div class="obj-head">7 &middot; "I'll have to call you back"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"Yes, definitely check to see if that'll work. Tell you what, let's pencil something in now and you can adjust if needed. We're booking 2 to 3 weeks out. What does next Tuesday at [time] look like?"</div>
+      <p class="tip"><span class="tip-label">Tip:</span> About 80% who say "I'll call back" never do. Pencil it in.</p>
+    </div></div>
+
+    <div class="obj"><div class="obj-head">8 &middot; "I just don't feel like it today"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"Some days are like that. Can I ask, is it the appointment itself you're not looking forward to, or just a rough day? [If anxiety:] This is just a quick [cleaning/filling], very straightforward, and our team is gentle. We've blocked this time just for you. [If bad day:] Sometimes once you're here it's not as bad as the morning makes it feel."</div>
+      <p class="tip"><span class="tip-label">Tip:</span> Usually anxiety in disguise. Soft nudge, not pressure.</p>
+    </div></div>
+
+    <div class="obj"><div class="obj-head">9 &middot; "Family emergency"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"Oh my goodness, I'm so sorry. Please take care of your family, don't worry about anything on our end. When things settle, give us a call. I'll make a note to check in with you in about a week, does that sound okay?"</div>
+      <p class="tip"><span class="tip-label">Tip:</span> Don't push. But commit to a one-week follow-up call.</p>
+    </div></div>
+
+    <div class="obj"><div class="obj-head">10 &middot; "Life is crazy, I just need to reschedule"</div><div class="obj-body">
+      <div class="script"><span class="say-label">Say</span>"I hear you. Let's get you on the books for something further out so it's there when things calm down. We have openings 3 to 4 weeks out, what day works best, morning or afternoon? Great. We send a text a few days before so you can adjust then. We're going to help you stay on track through the whirlwind."</div>
+      <p class="tip"><span class="tip-label">Tip:</span> Take the win. Keep them on the books, even if further out.</p>
+    </div></div>
+
+    <!-- ============ 9. OFFENDERS ============ -->
+    <h2 id="offenders"><span class="num">10</span>Repeat Offenders &amp; VIPs</h2>
+    <p>Pareto's Principle holds here: roughly <strong>20% of patients create 80% of our scheduling pain.</strong> With repeat offenders, be polite but firm, and enlist them as a partner in solving it rather than scolding them.</p>
+    <div class="script"><span class="say-label">Say</span>"Steve, I need your help. For some reason we haven't been able to make these appointments work the way we need to, I looked back and we've rescheduled this one at least five times. <strong>What would you suggest to get this back on track?</strong>"</div>
+    <div class="script"><span class="say-label">Then offer</span>"Could I suggest this: what if I message you the day an opening comes up, to see if you can come in that day? Would that make sense?"</div>
+    <div class="why"><span class="why-label">Why it works</span> Asking "what would you suggest?" hands them ownership of the problem. People keep commitments they designed themselves.</div>
+
+    <h4>The VIP List</h4>
+    <p>Some patients aren't disrespectful, they're just hectic, disorganized, or forgetful. Put them on a VIP list and call them only for same-day openings rather than booking them far out. Types who belong here:</p>
+    <ul>
+      <li>Hectic schedules</li>
+      <li>Organizationally challenged</li>
+      <li>Short-term memory difficulties</li>
+    </ul>
+
+    <!-- ============ 10. FILL ============ -->
+    <h2 id="fill"><span class="num">11</span>Filling a Hole Fast</h2>
+    <p>When a cancellation does get through, we work the schedule with intensity. Here's the order to fill an opening. (Order may shift with timing: if it's under an hour's notice, first pull a later patient earlier to buy time.)</p>
+
+    <h3>Doctor side</h3>
+    <ol>
+      <li><strong>ASAP List</strong>, booked patients who wanted to come sooner (especially delayed treatment).</li>
+      <li><strong>VIP List</strong>, same-day-only patients.</li>
+      <li><strong>Unscheduled Treatment Report</strong>, daily outbound calls offering the next available, especially same-day.</li>
+      <li><strong>Unscheduled List</strong>, patients who previously canceled.</li>
+      <li><strong>Appointed Recare</strong> for the day, ask if they want same-day treatment too.</li>
+      <li><strong>Emergency patients</strong> scheduled in the future, bring forward.</li>
+      <li><strong>Restorative patients</strong> scheduled later, move up.</li>
+      <li><strong>New patients</strong> scheduled later, move up.</li>
+    </ol>
+
+    <h3>Hygiene side</h3>
+    <ol>
+      <li>Review today's schedule for: doctor-side treatment patients who need recare; family members of today's hygiene patients; new patients on the schedule with no cleaning booked.</li>
+      <li><strong>ASAP list</strong>, patients wanting to move their recare up.</li>
+      <li>Patients previously rescheduled by office closures.</li>
+      <li><strong>Unscheduled Recare</strong> for the current month.</li>
+      <li>If a morning patient cancels, move up someone from later in the day.</li>
+      <li>Move up new-patient appointments.</li>
+    </ol>
+
+    <h3>ASAP texts, confident, never desperate</h3>
+    <div class="rule-box">
+      <p class="label">Never say "we just had a cancellation"</p>
+      <p style="margin:0;">It signals desperation and quietly teaches patients that cancellations are normal here. Use specific times ("today at 2:30" beats "this afternoon"), keep it 2 to 3 lines like a friend texting, and make YES/NO easy. Confident texts don't over-explain or justify themselves.</p>
+    </div>
+    <div class="script"><span class="say-label">Same-day opening</span>"Hi [First], it's [Name] at Love Dental. We have an opening today at 2:30 if you'd like to come in earlier than your scheduled visit. Reply YES and I'll get you set up."</div>
+    <div class="script"><span class="say-label">"I thought of you" recovery</span>"Hi [First], [Name] at Love Dental. A spot just opened tomorrow at [time]. I thought of you since you'd mentioned wanting to come in sooner. Want it? Reply YES and it's yours."</div>
+    <p class="tip"><span class="tip-label">Note:</span> Full ASAP text library is on the Cheat Sheet.</p>
+
+    <!-- ============ 11. NOSHOW ============ -->
+    <h2 id="noshow"><span class="num">12</span>When They Don't Show</h2>
+    <p>If a patient doesn't arrive, call <strong>within 5 minutes</strong> of the appointment time. Lead with concern for them, not frustration, and never assume the reason is frivolous.</p>
+    <div class="script"><span class="say-label">Voicemail</span>"Mrs. Jones, this is [Name] at Love Dental. It's 8:35 on Tuesday and we're here waiting for your 8:30 appointment. We haven't seen you yet and we're a little concerned, would you give us a call as soon as you get this so we know you're okay?"</div>
+    <div class="why"><span class="why-label">Why it works</span> Concern, not accusation, keeps the relationship warm and the door open for an immediate rebook. It also subtly reasserts that being here was the expectation.</div>
+
+    <!-- ============ 12. RULES ============ -->
+    <h2 id="rules"><span class="num">13</span>Rules for the Team</h2>
+    <ol>
+      <li><strong>If a patient texts to cancel, we call.</strong> Send the heads-up text, then call within 5 minutes. Never negotiate the cancellation by text.</li>
+      <li><strong>Never say "okay, no problem" to a cancellation.</strong> Try to save same-day or same-week first, every time.</li>
+      <li><strong>Book on the call.</strong> "I'll call you back" loses the patient. Pencil something in now.</li>
+      <li><strong>Two specific time slots beats "when are you free?"</strong> Always close with options.</li>
+      <li><strong>Drop the words confirm, cancel, remind.</strong> Talk about "changes to the schedule."</li>
+      <li><strong>Always use the patient's first name.</strong></li>
+      <li><strong>Get a verbal commitment at booking</strong>, "Will you be here?" and, past 48 hours, the pinky promise.</li>
+      <li><strong>Use the Make Your Day Fund.</strong> Up to $75, your call, framed as a personal gift, never as policy.</li>
+      <li><strong>Match the patient.</strong> Busy professional, short and direct. Anxious or lapsed, warm and low-pressure.</li>
+      <li><strong>Reschedule immediately</strong> on the same call, never let them hang up unbooked.</li>
+      <li><strong>Log every cancellation, save, and outcome.</strong> What we measure, we manage, and we celebrate recovered appointments in the morning huddle.</li>
+    </ol>
+
+    <div class="fund-box" style="margin-top:28px;">
+      <p class="label">&#128663; Uber Reimbursement Note (car trouble)</p>
+      <p style="margin:0;">Patient takes an Uber or Lyft, screenshots or brings the receipt, and we credit the cost (up to <strong>$50</strong>) toward today's visit. This comes out of the Make Your Day Fund. Frame it warmly and personally: "Tell you what, I'm going to do something especially for you." A $20 to $30 ride to save a $200 to $800 appointment is enormous ROI, and patients tell their friends about it.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Prepared for Love Dental &middot; Owner: Dr. Abedini &middot; Internal team document &middot; Not for distribution outside the practice. Pairs with the Cancellation Cheat Sheet (front desk quick reference).
+  </div>
+</div>
+</body>
+</html>
