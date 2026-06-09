@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Dental - Cancellation Cheat Sheet</title>
+<style>
+  :root {
+    --ld-deep: #263086;
+    --ld-deep-dark: #1b2563;
+    --ld-bright: #0e7ceb;
+    --ld-light: #e9f1fd;
+    --say-green: #1f7a4d;
+    --say-green-bg: #eaf6f0;
+    --warn-red: #a32020;
+    --warn-red-bg: #fbecec;
+    --ink: #1f2933;
+    --ink-soft: #52606d;
+    --line: #d6deec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.45;
+    margin: 0;
+    background: #f4f7fa;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .masthead {
+    background: linear-gradient(135deg, var(--ld-deep) 0%, var(--ld-bright) 100%);
+    color: #fff;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .masthead .brand { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.85; margin: 0 0 4px; }
+  .masthead h1 { margin: 0; font-size: 23px; font-weight: 700; }
+  .masthead .quick { font-size: 12px; opacity: 0.92; text-align: right; line-height: 1.7; }
+  .masthead .quick b { font-weight: 700; }
+  .body { padding: 8px 32px 40px; }
+
+  .topbar { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+  .topcard { border-radius: 10px; padding: 14px 18px; }
+  .topcard.rule { background: var(--warn-red-bg); border: 1px solid #f0c9c9; border-left: 4px solid var(--warn-red); }
+  .topcard.frame { background: var(--ld-light); border: 1px solid #c9ddf7; border-left: 4px solid var(--ld-bright); }
+  .topcard h3 { margin: 0 0 6px; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+  .topcard.rule h3 { color: var(--warn-red); }
+  .topcard.frame h3 { color: var(--ld-deep); }
+  .topcard p { margin: 4px 0; font-size: 14px; }
+  .nono { font-weight: 700; color: var(--warn-red); }
+
+  h2 { color: var(--ld-deep); font-size: 16px; letter-spacing: 1px; text-transform: uppercase; margin: 28px 0 4px; padding-bottom: 6px; border-bottom: 2px solid var(--ld-light); }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; align-items: stretch; }
+  .card { border: 1px solid var(--line); border-radius: 9px; overflow: hidden; break-inside: avoid; display: flex; flex-direction: column; }
+  .card .head { background: var(--ld-deep); color: #fff; padding: 7px 13px; font-weight: 700; font-size: 14px; }
+  .card .say { padding: 10px 13px 6px; font-style: italic; font-size: 13.5px; color: #16432c; background: var(--say-green-bg); flex: 1 0 auto; }
+  .card .tip { padding: 6px 13px 10px; font-size: 12px; color: var(--ink-soft); background: var(--say-green-bg); margin-top: auto; }
+  .card .tip b { color: var(--say-green); }
+
+  .lines { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .linebox { background: var(--say-green-bg); border: 1px solid #cfe8da; border-radius: 9px; padding: 12px 16px; }
+  .linebox .lbl { font-weight: 700; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--say-green); display: block; margin-bottom: 5px; }
+  .linebox p { margin: 0; font-style: italic; font-size: 13.5px; color: #16432c; }
+
+  .texts { margin-top: 12px; }
+  .texts .t { border: 1px solid var(--line); border-radius: 9px; padding: 9px 14px; margin-bottom: 8px; break-inside: avoid; }
+  .texts .t .tlbl { font-weight: 700; color: var(--ld-deep); font-size: 13px; display: block; margin-bottom: 3px; }
+  .texts .t p { margin: 0; font-size: 13.5px; font-style: italic; color: var(--ink); }
+
+  .uber { background: var(--ld-light); border: 1px solid #c9ddf7; border-left: 4px solid var(--ld-bright); border-radius: 0 9px 9px 0; padding: 12px 18px; margin-top: 12px; font-size: 13.5px; }
+  .uber b { color: var(--ld-deep); }
+
+  .feestrip { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-top: 12px; }
+  .feestrip .fhead { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ld-deep); margin: 0 0 8px; }
+  .feestrip .frow { display: grid; grid-template-columns: 150px 1fr; gap: 8px; font-size: 13.5px; padding: 5px 0; border-top: 1px solid var(--line); }
+  .feestrip .frow:first-of-type { border-top: none; }
+  .feestrip .fwhen { font-weight: 700; color: var(--ld-deep-dark); }
+  .feestrip .fnote { font-size: 12.5px; color: var(--ink-soft); margin: 9px 0 0; }
+
+  .cadence {
+    background: linear-gradient(135deg, var(--ld-deep) 0%, var(--ld-bright) 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 18px 22px 20px;
+    margin: 4px 0 8px;
+  }
+  .cadence .ctitle { font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 4px; }
+  .cadence .csub { font-size: 13px; opacity: 0.92; margin: 0 0 14px; }
+  .cadence .csub b { font-weight: 700; }
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .step { background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.25); border-radius: 9px; padding: 9px 11px; }
+  .step .n { display: inline-block; width: 20px; height: 20px; line-height: 20px; text-align: center; background: #fff; color: var(--ld-deep); font-weight: 700; font-size: 12px; border-radius: 50%; margin-bottom: 5px; }
+  .step .st { font-size: 12.5px; line-height: 1.35; }
+  .step .st b { font-weight: 700; }
+  .cadence .cnote { font-size: 12px; opacity: 0.9; margin: 13px 0 0; border-top: 1px solid rgba(255,255,255,0.22); padding-top: 11px; }
+  .cadence .cnote b { font-weight: 700; }
+
+  .bridge .t .tlbl { color: var(--ld-deep); }
+  .bridge .when { font-size: 11.5px; color: var(--ink-soft); font-weight: 400; font-style: italic; }
+
+  .footer { padding: 18px 32px 30px; color: var(--ink-soft); font-size: 12px; border-top: 1px solid var(--line); }
+
+  @media print {
+    body { background: #fff; }
+    .wrap { box-shadow: none; }
+    .card, .linebox, .texts .t, .topcard { break-inside: avoid; }
+    @page { margin: 0.4in; }
+  }
+  @media (max-width: 640px) {
+    .topbar, .grid, .lines { grid-template-columns: 1fr; }
+    .masthead { flex-direction: column; align-items: flex-start; }
+    .masthead .quick { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <div>
+      <p class="brand">Love Dental</p>
+      <h1>Cancellation Cheat Sheet</h1>
+    </div>
+    <div class="quick">
+      <b>4 STEPS:</b> Acknowledge, Empathize, Pivot to solve, Anchor value<br>
+      <b>GOAL:</b> Save same-day or same-week. Book on the call.
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="topbar">
+      <div class="topcard rule">
+        <h3>&#9888; The #1 Rule</h3>
+        <p>Never say <span class="nono">"OK, no problem, let's reschedule"</span> the moment they want to cancel. That sentence costs us money every time. Always try to save <b>today or this week</b> first.</p>
+      </div>
+      <div class="topcard frame">
+        <h3>The Save Line</h3>
+        <p><em>"Before we reschedule out, is there any way we can make today work? I'd hate for you to wait three weeks when we have you on the schedule right now."</em></p>
+      </div>
+    </div>
+
+    <div class="cadence">
+      <p class="ctitle">&#128241; If a patient TEXTS to cancel: we CALL</p>
+      <p class="csub">A text gives them all the control and zero friction. Every save tool we have (warmth, concern, the doctor check, the Make Your Day Fund) only works on the phone. <b>The text is the signal. The call is the save.</b> Never negotiate the cancellation over text.</p>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><div class="st"><b>Text comes in.</b> Don't reply to negotiate.</div></div>
+        <div class="step"><span class="n">2</span><div class="st"><b>Send the heads-up text</b> so the call is expected.</div></div>
+        <div class="step"><span class="n">3</span><div class="st"><b>Call within 5 min</b> while they're still holding the phone.</div></div>
+        <div class="step"><span class="n">4</span><div class="st"><b>No answer?</b> Voicemail + warm bridge text.</div></div>
+        <div class="step"><span class="n">5</span><div class="st"><b>Wait a bit, try once more.</b> Then graceful close.</div></div>
+      </div>
+      <p class="cnote"><b>The exception:</b> if they clearly say "stop contacting me" or it's a real family emergency, honor it and note the file. We pursue the ordinary "I need to cancel," never someone setting a real boundary.</p>
+    </div>
+
+    <h2>Bridge Texts: get them on the phone</h2>
+    <div class="texts bridge">
+      <div class="t"><span class="tlbl">1 &middot; The heads-up <span class="when">(send the instant you see the cancel text, before you dial)</span></span><p>"Hi [First], it's [Name] at Love Dental. So sorry to hear you need to make a change! Going to give you a quick call in the next couple minutes so we can take care of you. 😊"</p></div>
+      <div class="t"><span class="tlbl">2 &middot; Missed you, warm <span class="when">(you called, no answer)</span></span><p>"Hi [First], [Name] at Love Dental. Just tried you, no worries I missed you! I wanted to check in and see what's going on so we can find a time that works better for you. When's a good moment to catch you?"</p></div>
+      <div class="t"><span class="tlbl">3 &middot; The genuine check-in <span class="when">(second attempt, or if they ignore #2)</span></span><p>"Hi [First], just thinking of you. Everything okay? Give me a quick call when you have a sec, I'd love to get you taken care of and not have you waiting weeks. 💙"</p></div>
+      <div class="t"><span class="tlbl">4 &middot; The graceful close <span class="when">(gone quiet after a couple tries, leave the door open)</span></span><p>"No problem at all, [First]! I know life gets busy. Whenever you're ready, we're here and we'd love to see you. Just text or call and we'll get you right back on the schedule. 😊"</p></div>
+    </div>
+
+    <h2>Top 10 Objections</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="head">1 &middot; "I'm sick"</div>
+        <div class="say">"I'm so sorry you're not well. Is it contagious or more like allergies? I have an opening [day this week or day next week] which gives you a few days to bounce back and you're also not having to wait weeks to get back in."</div>
+        <div class="tip"><b>Goal:</b> rebook within 7 days, not next month.</div>
+      </div>
+
+      <div class="card">
+        <div class="head">2 &middot; "Car trouble / flat tire"</div>
+        <div class="say">"That's the worst! Tell you what, I'm going to do something especially for you. Each of us on the team has a little leeway to take care of our patients and make someone's day, and I'd love to use mine to help you out. If you grab an Uber or Lyft, we'll put it toward today's visit, so you're saving the ride and the cancellation fee. What do you think, want me to text you the address?"</div>
+        <div class="tip"><b>Credit up to $50.</b> They bring the receipt at checkout. Warm, not transactional.</div>
+      </div>
+
+      <div class="card">
+        <div class="head">3 &middot; "Childcare fell through"</div>
+        <div class="say">"Don't you hate when that happens! Good news is, we love kids here. We have Disney, Netflix and toys for the kiddos. Instead of paying a sitter another day, bring them with you. Let's save you that babysitter money."</div>
+        <div class="tip"><b>Frame:</b> "save the babysitter money" = a win, not an inconvenience.</div>
+      </div>
+
+      <div class="card">
+        <div class="head">4 &middot; "Work / boss needs me"</div>
+        <div class="say">"Work doesn't always cooperate. Is this a one-time thing, or is your schedule usually inflexible with work? We've got 8 AM and some late-afternoon slots, let's book [day this week/next] before both our schedules fill up."</div>
+        <div class="tip"><b>Book NOW on the call.</b> Never "I'll call you back."</div>
+      </div>
+
+      <div class="card">
+        <div class="head">5 &middot; "Can't afford it right now"</div>
+        <div class="say">"I appreciate you being honest, let's figure it out together. Let's get this on monthly payments, we can get you approved in ~60 seconds and most patients qualify for 0% interest. Your insurance is awesome and covers $[X], so we just need to make $[Y] work. Want me to send the Cherry link right now?"</div>
+        <div class="tip"><b>The magic move:</b> send the link on the call.</div>
+      </div>
+
+      <div class="card">
+        <div class="head">6 &middot; "I forgot / not expecting it"</div>
+        <div class="say">"No worries! Good news, you're still on the schedule. If you can be here in 30-45 min we can still see you. If not, I can get you in [later today/tomorrow/this week] or [later today/tomorrow/this week]?"</div>
+        <div class="tip"><b>Offer same-day FIRST.</b></div>
+      </div>
+
+      <div class="card">
+        <div class="head">7 &middot; "I'll call you back"</div>
+        <div class="say">"Yes, definitely check to see if that'll work. Tell you what, let's pencil something in now and you can adjust if needed. We're booking 2-3 weeks out. What does next Tuesday at XXX look like?"</div>
+        <div class="tip"><b>80% who say "call back" never do.</b> Pencil it in.</div>
+      </div>
+
+      <div class="card">
+        <div class="head">8 &middot; "Don't feel like it today"</div>
+        <div class="say">"Some days are like that. Is it the appointment you're not looking forward to, or just a rough day? [Anxiety:] It's quick and our team is gentle. [Bad day:] Once you're here it's often not as bad as the morning makes it feel."</div>
+        <div class="tip"><b>Usually anxiety in disguise.</b> Soft nudge, not pressure.</div>
+      </div>
+
+      <div class="card">
+        <div class="head">9 &middot; "Family emergency"</div>
+        <div class="say">"Oh my goodness, I'm so sorry. Please take care of your family, don't worry about anything on our end. When things settle, give us a call. I'll check in with you in about a week, okay?"</div>
+        <div class="tip"><b>Don't push.</b> But commit to a 1-week follow-up call.</div>
+      </div>
+
+      <div class="card">
+        <div class="head">10 &middot; "Life is crazy, need to reschedule"</div>
+        <div class="say">"I hear you. Let's get you on the books further out so it's there when things calm down. 3-4 weeks out, day of week, morning or afternoon? We'll text a few days before so you can adjust."</div>
+        <div class="tip"><b>Take the win.</b> Keep them booked, even if further out.</div>
+      </div>
+
+    </div>
+
+    <h2>ASAP List Texts: confident, never desperate</h2>
+    <div class="uber">
+      <b>Rules:</b> Never say "we just had a cancellation." Use specific times ("today at 2:30" beats "this afternoon"). Keep it 2-3 lines like a friend texting. Make YES/NO easy. Don't over-explain.
+    </div>
+    <div class="texts" style="margin-top:12px;">
+      <div class="t"><span class="tlbl">1 &middot; Same-day opening (general)</span><p>"Hi [First], it's [Name] at Love Dental. We have an opening today at 2:30 if you'd like to come in earlier than your scheduled appointment. Reply YES if you can make it and I'll get you set up. &#128522;"</p></div>
+      <div class="t"><span class="tlbl">2 &middot; Patient booked further out</span><p>"Hi [First]! [Name] at Love Dental. Your appointment is on [date], but we just had a spot open today at [time] / tomorrow at [time]. Want me to move you up? Reply YES or NO, no worries either way."</p></div>
+      <div class="t"><span class="tlbl">3 &middot; Unscheduled treatment patient</span><p>"Hey [First], it's [Name] at Love Dental. I know you've been meaning to get back in for [the crown on #14 / your filling]. I have an opening today at 3:00 if you'd like to take care of it. Reply YES and I'll lock it in."</p></div>
+      <div class="t"><span class="tlbl">4 &middot; Mass text to fill a gap (day-of)</span><p>"Hi [First], Love Dental here! We have a same-day opening today at [time]. First to confirm gets the spot. Reply YES if you can make it!"</p></div>
+      <div class="t"><span class="tlbl">5 &middot; Hygiene recall (overdue)</span><p>"Hi [First]! [Name] at Love Dental. Looks like it's been a few months since your last cleaning. We have openings this week: Wed at 9 AM or Fri at 2 PM. Which works better? &#128522;"</p></div>
+      <div class="t"><span class="tlbl">6 &middot; The "I thought of you" recovery</span><p>"Hi [First], [Name] at Love Dental. A spot just opened tomorrow at [time]. I thought of you since you'd mentioned wanting to come in sooner. Want it? Reply YES and it's yours."</p></div>
+    </div>
+
+    <h2>Two Lines to Memorize</h2>
+    <div class="lines">
+      <div class="linebox">
+        <span class="lbl">The Save Line</span>
+        <p>"Before we reschedule out, can I ask, is there any way we can make today work? I'd really hate for you to wait three weeks when we have you on the schedule right now."</p>
+      </div>
+      <div class="linebox">
+        <span class="lbl">The Policy Reminder (use sparingly)</span>
+        <p>"Friendly reminder, per our attendance policy, since we're inside 48 hours there's a cancellation fee. I have some leeway if you can make it in the next day or two. I'd love to keep your appointment and avoid any fees."</p>
+      </div>
+    </div>
+
+    <div class="feestrip">
+      <p class="fhead">&#128176; Cancellation Fee: the rule</p>
+      <div class="frow"><span class="fwhen">First time</span><span>Always waive it. "We'll take care of that this time, we really value you." Goodwill move.</span></div>
+      <div class="frow"><span class="fwhen">Repeat offender</span><span>Fee gets real ($50 to $75), or move them to same-day-only so they can't hold a slot they'll waste. Get a card on file going forward.</span></div>
+      <div class="frow"><span class="fwhen">Real emergency</span><span>No fee, ever. Concern first, warm follow-up.</span></div>
+      <p class="fnote">The fee is a value signal, not a revenue plan. The $150 in the save script is theater we waive; $50 to $75 is what we'd actually charge, and only the repeat tier. <b>Consistency beats the amount.</b> Never punish a good patient for one bad day.</p>
+    </div>
+
+    <div class="uber" style="margin-top:20px;">
+      &#128663; <b>Uber Reimbursement (car trouble):</b> Patient takes an Uber, screenshots/brings the receipt, we credit up to <b>$50</b> toward today's visit. Frame: <em>"Tell you what, I'm going to do something especially for you..."</em> Warm and special, not transactional. A $20-30 ride saves a $200-800 appointment, and they tell their friends.
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Love Dental &middot; Front Desk Quick Reference &middot; Keep at the desk &middot; Full protocol &amp; psychology in the Cancellation Prevention Protocol.
+  </div>
+</div>
+</body>
+</html>
