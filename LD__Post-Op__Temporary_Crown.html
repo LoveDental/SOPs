@@ -116,6 +116,53 @@
   .figure.thread img{max-width:215px;}
   .figure.sfloss img{max-width:120px;}
   .figcap{font-size:10.5px;color:var(--muted);margin-top:2px;}
+  .cols-grid .callout-cell{padding:9px 12px;}
+  .cols-grid .callout-cell h3{margin:0 0 4px;font-size:14px;font-weight:700;color:var(--red-text);}
+  .cols-grid .callout-cell ul{margin:2px 0;padding-left:18px;}
+  .cols-grid .callout-cell li{font-size:12.4px;}
+
+  /* ===== MOBILE: phones and narrow screens ===== */
+  @media screen and (max-width:760px){
+    body{background:#fff;}
+    .page{
+      width:100%;
+      height:auto;
+      min-height:0;
+      margin:0;
+      padding:20px 18px 26px;
+      box-shadow:none;
+      overflow:visible;
+      display:block;
+    }
+    .logo img{height:52px;}
+    .masthead{font-size:21px;padding:13px 12px;margin-bottom:15px;}
+    /* stack the two-column and grid layouts into one column */
+    .cols{display:block;}
+    .col{display:block;}
+    .cols-grid{display:block;}
+    .cols-grid .cell{margin-bottom:4px;}
+    /* readable type on phones */
+    p,li{font-size:15px;line-height:1.4;}
+    .lead{font-size:15px;}
+    h2{font-size:16px;margin:14px 0 5px;padding:5px 11px;}
+    .callout p,.callout li,.bar-list li,.cols-grid .callout-cell li{font-size:14.5px;}
+    .last{margin:16px 0 0;padding:13px 15px;}
+    .last h2{font-size:16.5px;}
+    .last p,.last li{font-size:15px;}
+    /* the two-up red bar list becomes single column on phones */
+    .bar-list{columns:1;}
+    .callout-bar{margin:14px 0 0;}
+    /* images scale up a bit for small screens */
+    .figure.thread img{max-width:260px;}
+    .figure.sfloss img{max-width:150px;}
+    .tagline{font-size:14px;margin:14px 0 10px;}
+    .footer{font-size:12.5px;padding-top:10px;}
+    /* neutralize desktop compact shrink rules on mobile */
+    body.compact p,body.compact li,body.compact .lead,
+    body.compact .callout p,body.compact .callout li,
+    body.compact .bar-list li,body.compact .last p,body.compact .last li{font-size:15px;}
+    body.compact h2{font-size:16px;}
+  }
 </style>
 </head>
 <body>
